@@ -1,0 +1,159 @@
+{
+  "sourceId": "seed_health_knowledge",
+  "sourceName": "官方健康指南科普种子库",
+  "categoryCode": "KNOWLEDGE",
+  "status": "success",
+  "recordCount": 15,
+  "items": [
+    {
+      "title": "成年人每日睡眠建议：7–8 小时",
+      "url": "seed://knowledge/sleep-adult",
+      "summary": "成年人宜保持规律作息，多数成年人每天睡眠 7–8 小时；睡前避免长时间看屏幕。",
+      "contentHtml": "<p>中国《健康中国行动（2019—2030年）》倡导全民健康生活方式，强调充足睡眠与规律作息。成年人一般建议每天睡眠 7–8 小时，尽量固定就寝与起床时间，睡前 1 小时减少使用手机、电脑等电子屏幕。</p><p>长期睡眠不足与肥胖、心血管疾病、免疫力下降等风险相关。若长期失眠或打鼾严重，应咨询医疗机构。</p><p>参考：<a href=\"http://www.gov.cn/zhengce/content/201907/content_5410778.htm\" target=\"_blank\" rel=\"noopener\">健康中国行动（2019—2030年）</a></p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "合理膳食：每天12种、每周25种以上食物",
+      "url": "seed://knowledge/diet-varied",
+      "summary": "食物多样、谷类为主、少油少盐少糖，是居民膳食的基本原则。",
+      "contentHtml": "<p>《中国居民膳食指南》建议：食物多样，平均每天摄入 12 种以上、每周 25 种以上；谷薯类为主，粗细搭配；多吃蔬菜水果、奶类、大豆；适量鱼禽蛋瘦肉；少油少盐少糖，足量饮水。</p><p>成人每日食盐不超过 5g，添加糖不超过 50g，烹调油 25–30g，饮水 1500–1700ml（约 7–8 杯）。</p><p>参考：<a href=\"https://www.cnsoc.org/dietaryguidelines/\" target=\"_blank\" rel=\"noopener\">中国居民膳食指南（中国营养学会）</a></p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "每周至少150分钟中等强度运动",
+      "url": "seed://knowledge/exercise-150",
+      "summary": "每周累计 150 分钟中等强度有氧运动，或 75 分钟高强度运动，并配合力量训练。",
+      "contentHtml": "<p>《健康中国行动》倡导每周至少 5 天、每天 30 分钟中等强度有氧运动（如快走、慢跑、骑车），或每周 75 分钟高强度运动（如跑步、游泳）。同时建议每周 2–3 次力量练习，增强肌肉与骨骼。</p><p>运动应循序渐进，老年人、慢性病患者运动前宜咨询医生。</p><p>参考：<a href=\"http://www.gov.cn/zhengce/content/201907/content_5410778.htm\" target=\"_blank\" rel=\"noopener\">健康中国行动</a></p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "科学饮水：少量多次，首选白开水",
+      "url": "seed://knowledge/water-intake",
+      "summary": "成人每日约 1500–1700ml，高温或运动时应适当增加，首选白开水。",
+      "contentHtml": "<p>足量饮水有助于维持体温、运输营养、排出代谢废物。建议少量多次，主动饮水，首选白开水或淡茶，少喝含糖饮料。</p><p>出现口渴、尿色偏黄时提示可能饮水不足。心肾功能异常者饮水量应遵医嘱。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "健康作息：固定起床时间比“补觉”更重要",
+      "url": "seed://knowledge/regular-schedule",
+      "summary": "尽量每天同一时间起床，包括周末；午睡 20–30 分钟为宜。",
+      "contentHtml": "<p>规律作息有助于稳定生物钟。建议固定起床时间，周末也不宜大幅延后；午睡以 20–30 分钟为宜，过长可能影响夜间睡眠。</p><p>夜班人群尽量在安静、遮光环境休息，仍应保证总睡眠时长。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "久坐危害与“每小时动一动”",
+      "url": "seed://knowledge/sedentary-break",
+      "summary": "长期久坐增加慢病风险，建议每坐 1 小时起身活动 5 分钟。",
+      "contentHtml": "<p>长时间静坐与肥胖、2 型糖尿病、心血管疾病风险上升相关。办公、学习时建议每 1 小时起身伸展、走动 5 分钟；每日保证基本身体活动量。</p><p>可尝试站立办公、步行会议等，将运动融入日常。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "用眼卫生：20-20-20 法则",
+      "url": "seed://knowledge/eye-20-20-20",
+      "summary": "每用眼 20 分钟，看 20 英尺（约 6 米）外物体 20 秒，缓解视疲劳。",
+      "contentHtml": "<p>长时间近距离用眼易导致干眼、视疲劳。除 20-20-20 法则外，应保持正确读写姿势，屏幕略低于眼平，环境光线充足，避免躺卧看手机。</p><p>儿童青少年应控制屏幕时间，增加户外活动，预防近视。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "高血压患者的低盐饮食要点",
+      "url": "seed://knowledge/hypertension-diet",
+      "summary": "每日食盐不超过 5g，少吃腌制食品，注意酱油、味精等“隐形盐”。",
+      "contentHtml": "<p>高血压患者应限制钠盐摄入，每日食盐不超过 5g（约一啤酒瓶盖），少吃咸菜、腊肉、加工食品。多采用蒸、煮、凉拌，少用油炸。</p><p>增加钾摄入（如新鲜蔬菜、水果）有助于血压管理。请遵医嘱规律服药、监测血压。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "合理控糖：警惕饮料和糕点中的添加糖",
+      "url": "seed://knowledge/sugar-control",
+      "summary": "每日添加糖摄入不超过 50g，最好控制在 25g 以下。",
+      "contentHtml": "<p>过多添加糖与龋齿、肥胖、2 型糖尿病风险相关。少喝含糖饮料，少吃糕点、糖果，购买食品时注意营养成分表中的“糖”含量。</p><p>糖尿病患者应在医生/营养师指导下制定个体化饮食方案。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "心理健康：学会识别压力并主动求助",
+      "url": "seed://knowledge/mental-health",
+      "summary": "持续情绪低落、失眠、兴趣丧失超过两周，建议寻求专业心理或医疗帮助。",
+      "contentHtml": "<p>心理健康与身体健康同等重要。可通过规律运动、社交、充足睡眠缓解压力；避免用酒精、过度购物等方式应对负面情绪。</p><p>若出现持续情绪问题、自伤念头，请及时联系家人、学校心理中心或医疗机构。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "儿童青少年：每天累计1小时以上中高强度运动",
+      "url": "seed://knowledge/youth-exercise",
+      "summary": "保证足量身体活动，减少静态行为，促进骨骼发育与视力保护。",
+      "contentHtml": "<p>儿童青少年应养成每天累计 1 小时以上中高强度身体活动的习惯，如跑步、球类、游泳；减少久坐，每天视屏时间不宜过长。</p><p>户外活动有助于预防近视、促进维生素 D 合成与骨骼健康。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "老年人健康：防跌倒与均衡营养",
+      "url": "seed://knowledge/elderly-safety",
+      "summary": "居家防滑、适度力量训练、定期体检，预防跌倒与营养不良。",
+      "contentHtml": "<p>老年人应保证优质蛋白（鱼、蛋、奶、豆）摄入，预防 sarcopenia（肌少症）；居家清除地面障碍、安装扶手，穿防滑鞋。</p><p>建议每年体检，慢病用药遵医嘱，不可自行停药。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "戒烟限酒：最有效的健康投资之一",
+      "url": "seed://knowledge/tobacco-alcohol",
+      "summary": "戒烟可显著降低多种癌症、心血管病风险；如饮酒，应限量。",
+      "contentHtml": "<p>吸烟损害几乎所有人体系统，戒烟任何年龄都有益。如饮酒，男性每日酒精不超过 25g，女性不超过 15g（约相当于啤酒 750ml/450ml），孕妇、驾驶员应禁酒。</p><p>可寻求戒烟门诊、12320 卫生热线等专业帮助。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "夏季防暑：及时补水、避免正午暴晒",
+      "url": "seed://knowledge/heat-prevention",
+      "summary": "高温天注意补水、通风，出现头晕、恶心等中暑症状应立即降温就医。",
+      "contentHtml": "<p>高温季节避免 10–16 点长时间户外活动，穿透气衣物，及时补充水和电解质。出现高热、意识模糊等热射病表现，应立即拨打 120。</p><p>老人、儿童、户外劳动者为中暑高危人群，需特别关注。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "title": "传染病预防：勤洗手、戴口罩、接种疫苗",
+      "url": "seed://knowledge/infection-prevent",
+      "summary": "呼吸道传染病高发期注意个人卫生，按程序接种免疫规划疫苗。",
+      "contentHtml": "<p>用流动水和肥皂洗手至少 20 秒，咳嗽喷嚏遮掩口鼻。在流感、新冠等高发期，人群密集场所可佩戴口罩。</p><p>儿童、老年人、慢性病患者应按国家免疫规划及医生建议接种疫苗。</p>",
+      "sourceId": "seed_health_knowledge",
+      "sourceName": "官方健康指南科普种子库",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    }
+  ]
+}

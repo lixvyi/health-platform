@@ -1,0 +1,54 @@
+{
+  "sourceId": "people_health_channel",
+  "sourceName": "人民网健康频道",
+  "categoryCode": "KNOWLEDGE",
+  "status": "success",
+  "recordCount": 5,
+  "items": [
+    {
+      "title": "国家卫生健康委提醒：“清淤术”等所谓“高科技手段”严重…",
+      "url": "http://health.people.com.cn/n1/2026/0318/c14739-40684410.html",
+      "sourceId": "people_health_channel",
+      "sourceName": "人民网健康频道",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:31:56.857097+00:00"
+    },
+    {
+      "title": "警惕“伪营养师”推销保健食品 中消协发布消费提示",
+      "url": "http://health.people.com.cn/n1/2025/1119/c14739-40607278.html",
+      "sourceId": "people_health_channel",
+      "sourceName": "人民网健康频道",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:31:56.857326+00:00"
+    },
+    {
+      "title": "严管景区饮食摊点卫生（建议）",
+      "url": "http://health.people.com.cn/n1/2025/0915/c14739-40563947.html",
+      "sourceId": "people_health_channel",
+      "sourceName": "人民网健康频道",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:31:56.857482+00:00"
+    },
+    {
+      "title": "立夏养生 中医给出了具体建议",
+      "url": "http://health.people.com.cn/n1/2026/0504/c14739-40713485.html",
+      "sourceId": "people_health_channel",
+      "sourceName": "人民网健康频道",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:31:56.857681+00:00"
+    },
+    {
+      "title": "扶正护健康，中医专家开出“生活处方”",
+      "url": "http://health.people.com.cn/n1/2026/0506/c14739-40714185.html",
+      "sourceId": "people_health_channel",
+      "sourceName": "人民网健康频道",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:31:56.857699+00:00"
+    }
+  ]
+}

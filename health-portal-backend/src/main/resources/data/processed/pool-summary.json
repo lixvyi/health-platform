@@ -1,0 +1,19 @@
+{
+  "engine": "pandas",
+  "finishedAt": "2026-07-06T14:42:42.746938+00:00",
+  "nbsDatasetCount": 25,
+  "shanghaiDatasetCount": 20,
+  "shanghaiRecordSum": 409,
+  "topShanghaiCategories": {
+    "健康促进": 111,
+    "动物诊疗": 67,
+    "医疗机构": 51,
+    "预防接种": 38,
+    "机构信息": 33,
+    "康复服务": 32,
+    "母婴保健": 18,
+    "公共卫生": 16,
+    "学生健康": 16,
+    "基层卫生": 12
+  }
+}

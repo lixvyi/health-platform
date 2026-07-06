@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: health-portal-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "060508"
+      MYSQL_DATABASE: health_portal
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    image: redis:7-alpine
+    container_name: health-portal-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build:
+      context: ../health-portal-backend
+      dockerfile: Dockerfile
+    container_name: health-portal-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      AI_API_KEY: ${AI_API_KEY:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - upload_data:/app/uploads
+
+  nginx:
+    image: nginx:alpine
+    container_name: health-portal-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../health-portal-frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+  redis_data:
+  upload_data:
+
+# 扩展层（答辩/文档说明，按需启用 Hadoop/Spark 集群）
+# profiles: [bigdata]
+# services:
+#   hadoop-namenode: ...
+#   spark-master: ...

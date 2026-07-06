@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csu.health.portal.module.content.mapper.CmsContentMapper">
+
+  <sql id="contentColumns">
+    id, category_code, title, summary, content, source_url, cover_url, author,
+    view_count, status, publish_time, created_by, created_at, updated_at
+  </sql>
+
+  <sql id="contentTable">
+    SELECT <include refid="contentColumns"/> FROM cms_content
+  </sql>
+
+  <!-- 根据主键查询 -->
+  <select id="selectByIdXml" resultType="com.csu.health.portal.module.content.entity.CmsContent">
+    <include refid="contentTable"/>
+    WHERE id = #{id}
+  </select>
+
+  <!-- 动态 SQL：where + if 多条件分页查询（讲义 where-if） -->
+  <select id="selectPageByCondition" resultType="com.csu.health.portal.module.content.entity.CmsContent">
+    <include refid="contentTable"/>
+    <where>
+      <if test="categoryCode != null and categoryCode != ''">
+        AND category_code = #{categoryCode}
+      </if>
+      <if test="keyword != null and keyword != ''">
+        AND title LIKE concat('%', #{keyword}, '%')
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+    </where>
+    ORDER BY publish_time DESC, id DESC
+    LIMIT #{offset}, #{pageSize}
+  </select>
+
+  <select id="countByCondition" resultType="long">
+    SELECT COUNT(1) FROM cms_content
+    <where>
+      <if test="categoryCode != null and categoryCode != ''">
+        AND category_code = #{categoryCode}
+      </if>
+      <if test="keyword != null and keyword != ''">
+        AND title LIKE concat('%', #{keyword}, '%')
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+    </where>
+  </select>
+
+  <!-- 新增 -->
+  <insert id="insertXml" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO cms_content (
+      category_code, title, summary, content, cover_url, author,
+      view_count, status, publish_time, created_by
+    ) VALUES (
+      #{categoryCode}, #{title}, #{summary}, #{content}, #{coverUrl}, #{author},
+      #{viewCount}, #{status}, #{publishTime}, #{createdBy}
+    )
+  </insert>
+
+  <!-- 动态 SQL：set + if 更新（讲义 set-if-where） -->
+  <update id="updateDynamic">
+    UPDATE cms_content
+    <set>
+      <if test="categoryCode != null and categoryCode != ''">
+        category_code = #{categoryCode},
+      </if>
+      <if test="title != null and title != ''">
+        title = #{title},
+      </if>
+      <if test="summary != null">
+        summary = #{summary},
+      </if>
+      <if test="content != null">
+        content = #{content},
+      </if>
+      <if test="coverUrl != null">
+        cover_url = #{coverUrl},
+      </if>
+      <if test="author != null">
+        author = #{author},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime},
+      </if>
+    </set>
+    <where>
+      id = #{id}
+    </where>
+  </update>
+
+  <!-- 删除 -->
+  <delete id="deleteByIdXml">
+    DELETE FROM cms_content WHERE id = #{id}
+  </delete>
+
+  <!-- 阅读量 +1 -->
+  <update id="incrementViewCount">
+    UPDATE cms_content SET view_count = view_count + 1 WHERE id = #{id}
+  </update>
+
+  <!-- foreach：按多个 id 查询（讲义 foreach-list） -->
+  <select id="selectByIds" resultType="com.csu.health.portal.module.content.entity.CmsContent">
+    <include refid="contentTable"/>
+    <where>
+      id IN
+      <foreach collection="list" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+    </where>
+  </select>
+
+  <select id="selectRecentPublished" resultType="com.csu.health.portal.module.content.entity.CmsContent">
+    <include refid="contentTable"/>
+    WHERE status = 1
+      AND category_code = #{categoryCode}
+      AND publish_time >= DATE_SUB(NOW(), INTERVAL #{days} DAY)
+    ORDER BY publish_time DESC, id DESC
+    LIMIT #{limit}
+  </select>
+
+</mapper>

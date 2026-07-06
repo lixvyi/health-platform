@@ -1,0 +1,89 @@
+{
+  "sourceId": "gov_cn_zhengce",
+  "sourceName": "中国政府网-最新政策",
+  "categoryCode": "POLICY",
+  "status": "success",
+  "recordCount": 8,
+  "items": [
+    {
+      "title": "国务院关于印发《美丽中国建设“十五五”规划》的通知",
+      "url": "https://www.gov.cn/zhengce/content/202607/content_7074199.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029736+00:00",
+      "summary": "各省、自治区、直辖市人民政府，国务院各部委、各直属机构："
+    },
+    {
+      "title": "国务院关于《残疾人保障和发展“十五五”规划》的批复",
+      "url": "https://www.gov.cn/zhengce/content/202607/content_7074095.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029774+00:00",
+      "summary": "你委《关于报送〈残疾人保障和发展“十五五”规划（送审稿）〉的请示》（残工委发〔2026〕3号）收悉。现批复如下："
+    },
+    {
+      "title": "国务院关于《体育强国建设“十五五”规划》的批复",
+      "url": "https://www.gov.cn/zhengce/content/202607/content_7074092.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029800+00:00",
+      "summary": "你局《关于报请审定〈体育强国建设“十五五”规划（送审稿）〉的请示》（体政字〔2026〕137号）收悉。现批复如下："
+    },
+    {
+      "title": "国务院关于同意在上海市设立上海辰山国家植物园的批复",
+      "url": "https://www.gov.cn/zhengce/content/202607/content_7074090.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029817+00:00",
+      "summary": "上海市人民政府，自然资源部、住房城乡建设部、中国科学院、国家林草局："
+    },
+    {
+      "title": "退役军人就业创业促进条例",
+      "url": "https://www.gov.cn/zhengce/content/202606/content_7073788.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029842+00:00",
+      "summary": "《退役军人就业创业促进条例》已经2026年6月5日国务院第88次常务会议通过，现予公布，自2026年8月1日起施行。"
+    },
+    {
+      "title": "国务院关于印发《教育发展“十五五”规划》的通知",
+      "url": "https://www.gov.cn/zhengce/content/202606/content_7073640.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029859+00:00",
+      "summary": "各省、自治区、直辖市人民政府，国务院各部委、各直属机构："
+    },
+    {
+      "title": "国务院办公厅关于进一步完善大中型水库移民后期扶持政策的通知",
+      "url": "https://www.gov.cn/zhengce/content/202606/content_7073259.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029874+00:00",
+      "summary": "大中型水库移民后期扶持政策的通知"
+    },
+    {
+      "title": "国务院关于印发《实施就业优先战略“十五五”规划》的通知",
+      "url": "https://www.gov.cn/zhengce/content/202606/content_7072481.htm",
+      "sourceId": "gov_cn_zhengce",
+      "sourceName": "中国政府网-最新政策",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "collectedAt": "2026-07-06T15:32:04.029888+00:00",
+      "summary": "国务院关于印发《实施就业优先战略"
+    }
+  ]
+}

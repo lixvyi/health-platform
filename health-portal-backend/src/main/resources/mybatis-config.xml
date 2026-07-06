@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- Spring Boot 集成：仅保留 settings / typeAliases，数据源由 Spring 管理 -->
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <typeAliases>
+        <package name="com.csu.health.portal.module.auth.entity"/>
+        <package name="com.csu.health.portal.module.content.entity"/>
+        <package name="com.csu.health.portal.module.ai.entity"/>
+    </typeAliases>
+</configuration>

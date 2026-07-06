@@ -1,0 +1,115 @@
+{
+  "rateLimitSeconds": 3,
+  "userAgent": "HealthPortalBot/1.0 (CSU training; open data; +https://www.gov.cn)",
+  "sources": [
+    {
+      "id": "gov_cn_shuju",
+      "name": "中国政府网-数据栏目",
+      "platform": "internet",
+      "type": "html_list",
+      "url": "http://www.gov.cn/shuju/index.htm",
+      "attribution": "来源：中国政府网",
+      "keywords": ["数据", "统计", "GDP", "CPI", "PMI", "卫生", "就业", "收入"]
+    },
+    {
+      "id": "stats_gov_cn_sj",
+      "name": "国家统计局-数据发布栏目",
+      "platform": "internet",
+      "type": "html_list",
+      "url": "https://www.stats.gov.cn/sj/",
+      "attribution": "来源：国家统计局",
+      "keywords": []
+    }
+  ],
+  "cmsSources": [
+    {
+      "id": "seed_health_knowledge",
+      "name": "官方健康指南科普种子库",
+      "type": "local_seed",
+      "localFile": "scripts/seed_health_knowledge.json",
+      "attribution": "来源：健康中国行动、膳食指南等公开资料摘要"
+    },
+    {
+      "id": "people_health_channel",
+      "name": "人民网健康频道",
+      "type": "article_list",
+      "url": "http://health.people.com.cn/GB/408644/index.html",
+      "linkPattern": "/n1/",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "keywords": [],
+      "requireHealthKeyword": true,
+      "maxListItems": 35,
+      "fetchDetail": false
+    },
+    {
+      "id": "people_health_lifestyle",
+      "name": "人民网健康·生活方式",
+      "type": "article_list",
+      "url": "http://health.people.com.cn/GB/408573/index.html",
+      "linkPattern": "/n1/",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "keywords": [],
+      "requireHealthKeyword": true,
+      "maxListItems": 35,
+      "fetchDetail": false
+    },
+    {
+      "id": "gov_cn_zhengce",
+      "name": "中国政府网-最新政策",
+      "type": "policy_list",
+      "url": "http://www.gov.cn/zhengce/index.htm",
+      "linkPattern": "/zhengce/content/",
+      "categoryCode": "POLICY",
+      "attribution": "来源：中国政府网（公开政策索引，以官网为准）",
+      "keywords": [],
+      "requireHealthKeyword": false,
+      "maxListItems": 25,
+      "maxDetailFetch": 10,
+      "fetchDetail": true
+    },
+    {
+      "id": "internet_data_news",
+      "name": "互联网采集-数据与卫生资讯",
+      "type": "internet_mirror",
+      "crawlIds": ["gov_cn_shuju", "stats_gov_cn_sj"],
+      "categoryCode": "NEWS",
+      "attribution": "来源：政府官网公开信息（索引，以原文为准）",
+      "keywords": ["健康", "卫生", "医疗", "数据", "统计", "GDP", "CPI", "PMI", "发布", "就业", "医保", "养老"],
+      "requireHealthKeyword": false,
+      "maxListItems": 40
+    },
+    {
+      "id": "nhc_gov_zcjd",
+      "name": "国家卫健委-政策解读",
+      "type": "policy_list",
+      "url": "https://www.nhc.gov.cn/wjw/zcjd/list.shtml",
+      "categoryCode": "POLICY",
+      "attribution": "来源：国家卫生健康委员会（公开信息，以官网为准）",
+      "keywords": ["健康", "卫生", "医疗", "疾控", "公卫", "医院", "医保", "疫苗", "妇幼"],
+      "maxListItems": 25,
+      "maxDetailFetch": 5,
+      "fetchDetail": false,
+      "note": "部分网络环境可能返回412，失败时不影响其他源"
+    }
+  ],
+  "openDownloads": [
+    {
+      "id": "shanghai_open_mirror",
+      "name": "上海开放数据-本地同步校验",
+      "platform": "shanghai",
+      "type": "local_sync",
+      "localDir": "data/open-data/shanghai",
+      "attribution": "来源：上海市公共数据开放平台"
+    },
+    {
+      "id": "nbs_open_mirror",
+      "name": "国家统计局-本地同步校验",
+      "platform": "nbs",
+      "type": "local_sync",
+      "localDir": "data/open-data/stats",
+      "attribution": "来源：国家统计局"
+    }
+  ]
+}

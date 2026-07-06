@@ -1,0 +1,81 @@
+{
+  "sourceId": "people_health_lifestyle",
+  "sourceName": "人民网健康·生活方式",
+  "categoryCode": "KNOWLEDGE",
+  "status": "success",
+  "recordCount": 8,
+  "items": [
+    {
+      "title": "肌肉，女性健康的“隐形铠甲”（健康驿站）",
+      "url": "http://health.people.com.cn/n1/2026/0410/c14739-40698658.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.081686+00:00"
+    },
+    {
+      "title": "落实健康第一，刘校长做了几件小事",
+      "url": "http://health.people.com.cn/n1/2026/0409/c14739-40697813.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.081722+00:00"
+    },
+    {
+      "title": "讲好冬奥故事 践行“健康第一”",
+      "url": "http://health.people.com.cn/n1/2026/0317/c14739-40683328.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.081869+00:00"
+    },
+    {
+      "title": "新学期，健康站在“C位”",
+      "url": "http://health.people.com.cn/n1/2026/0304/c14739-40674268.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.081966+00:00"
+    },
+    {
+      "title": "健康学校建设全面启动",
+      "url": "http://health.people.com.cn/n1/2026/0228/c14739-40671904.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.081983+00:00"
+    },
+    {
+      "title": "2024年我国妇女健康水平持续提高",
+      "url": "http://health.people.com.cn/n1/2025/1231/c14739-40636363.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.082148+00:00"
+    },
+    {
+      "title": "立夏养生 中医给出了具体建议",
+      "url": "http://health.people.com.cn/n1/2026/0504/c14739-40713485.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.082380+00:00"
+    },
+    {
+      "title": "扶正护健康，中医专家开出“生活处方”",
+      "url": "http://health.people.com.cn/n1/2026/0506/c14739-40714185.html",
+      "sourceId": "people_health_lifestyle",
+      "sourceName": "人民网健康·生活方式",
+      "categoryCode": "KNOWLEDGE",
+      "attribution": "来源：人民网健康频道（公开报道索引，以原文为准）",
+      "collectedAt": "2026-07-06T15:32:00.082397+00:00"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+# Build
+target/
+dist/
+node_modules/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# Logs & temp
+logs/
+*.log
+logs/daily-collect.log
+uploads/
+tmp/
+
+# Env
+.env
+.env.local
+*.local.yml
+**/application-secrets.yml
+**/jdbc.properties
+
+# Local tools (Maven bundle, not for VCS)
+tools/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+jmeter-results/
+coverage/

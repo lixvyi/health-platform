@@ -1,0 +1,27 @@
+{
+  "sourceId": "internet_health_mirror",
+  "sourceName": "互联网采集-健康相关",
+  "categoryCode": "NEWS",
+  "status": "success",
+  "recordCount": 2,
+  "items": [
+    {
+      "title": "卫生和社会服务",
+      "url": "https://www.stats.gov.cn/sj/zbjs/202302/t20230202_1897089.html",
+      "sourceId": "internet_health_mirror",
+      "sourceName": "国家统计局-数据发布栏目",
+      "categoryCode": "POLICY",
+      "attribution": "来源：国家统计局",
+      "collectedAt": "2026-07-06T15:00:58.883959+00:00"
+    },
+    {
+      "title": "《养老产业统计分类（2020）》（国家统计局令第30号）2020-02-28",
+      "url": "https://www.stats.gov.cn/xw/tjxw/tzgg/202302/t20230202_1894104.html",
+      "sourceId": "internet_health_mirror",
+      "sourceName": "国家统计局-数据发布栏目",
+      "categoryCode": "POLICY",
+      "attribution": "来源：国家统计局",
+      "collectedAt": "2026-07-06T15:00:58.884357+00:00"
+    }
+  ]
+}

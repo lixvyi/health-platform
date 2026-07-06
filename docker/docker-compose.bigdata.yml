@@ -1,0 +1,57 @@
+# 大数据扩展层（与 docker-compose.yml 叠加使用）
+# 启动：cd docker && docker compose -f docker-compose.yml -f docker-compose.bigdata.yml --profile bigdata up -d
+version: '3.8'
+
+services:
+  minio:
+    profiles: [bigdata]
+    image: minio/minio:latest
+    container_name: health-portal-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+  spark:
+    profiles: [bigdata]
+    image: bitnami/spark:3.5
+    container_name: health-portal-spark
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    volumes:
+      - ../data:/data
+      - ../scripts:/scripts
+
+  etl:
+    profiles: [bigdata]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.etl
+    container_name: health-portal-etl
+    volumes:
+      - ../data:/app/data
+      - ../scripts:/app/scripts
+      - ../health-portal-backend/src/main/resources/data:/app/health-portal-backend/src/main/resources/data
+    depends_on:
+      - minio
+      - spark
+
+  backend:
+    environment:
+      APP_BIGDATA_SPARK_URL: http://spark:8080
+      APP_BIGDATA_MINIO_URL: http://minio:9000
+
+volumes:
+  minio_data:

@@ -1,0 +1,33 @@
+{
+  "finishedAt": "2026-07-06T15:32:37.874756+00:00",
+  "sources": [
+    {
+      "sourceId": "seed_health_knowledge",
+      "recordCount": 15
+    },
+    {
+      "sourceId": "people_health_channel",
+      "recordCount": 5
+    },
+    {
+      "sourceId": "people_health_lifestyle",
+      "recordCount": 8
+    },
+    {
+      "sourceId": "gov_cn_zhengce",
+      "recordCount": 8
+    },
+    {
+      "sourceId": "internet_data_news",
+      "recordCount": 33
+    },
+    {
+      "sourceId": "nhc_gov_zcjd",
+      "recordCount": 0
+    }
+  ],
+  "cmsImport": {
+    "inserted": 0,
+    "updated": 69
+  }
+}

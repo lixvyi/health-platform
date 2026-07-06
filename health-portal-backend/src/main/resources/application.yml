@@ -1,0 +1,68 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: health-portal
+  config:
+    import:
+      - classpath:jdbc.properties
+      - optional:classpath:application-secrets.yml
+  datasource:
+    url: ${mysql.url}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: ${mysql.driver}
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  ai:
+    openai:
+      api-key: ${AI_API_KEY:sk-placeholder}
+      base-url: ${AI_BASE_URL:https://api.deepseek.com}
+      chat:
+        options:
+          model: ${AI_MODEL:deepseek-chat}
+          temperature: 0.3
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.csu.health.portal.module.auth.entity,com.csu.health.portal.module.content.entity,com.csu.health.portal.module.ai.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+app:
+  jwt:
+    secret: HealthPortalJwtSecretKey2026CSUSoftwareEngineeringPractice
+    expiration-ms: 86400000
+  upload:
+    path: ./uploads
+  data-pool:
+    project-root: ..
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+logging:
+  level:
+    com.csu.health.portal: debug

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 讲义原生 MyBatis 测试专用：含 environments + mappers -->
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <typeAliases>
+        <package name="com.csu.health.portal.module.auth.entity"/>
+        <package name="com.csu.health.portal.module.content.entity"/>
+    </typeAliases>
+    <environments default="connect1">
+        <environment id="connect1">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mappers/SysUserMapper.xml"/>
+        <mapper resource="mappers/CmsContentMapper.xml"/>
+    </mappers>
+</configuration>

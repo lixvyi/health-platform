@@ -1,0 +1,32 @@
+{
+  "sourceId": "gov_cn_shuju",
+  "sourceName": "中国政府网-数据栏目",
+  "status": "success",
+  "recordCount": 3,
+  "items": [
+    {
+      "title": "2026年6月份我国制造业PMI为50.3%",
+      "url": "https://www.gov.cn/zhengce/jiedu/tujie/202606/content_7073824.htm",
+      "sourceId": "gov_cn_shuju",
+      "sourceName": "中国政府网-数据栏目",
+      "attribution": "来源：中国政府网",
+      "collectedAt": "2026-07-06T15:31:46.697207+00:00"
+    },
+    {
+      "title": "退役军人就业创业促进条例",
+      "url": "https://www.gov.cn/zhengce/content/202606/content_7073788.htm",
+      "sourceId": "gov_cn_shuju",
+      "sourceName": "中国政府网-数据栏目",
+      "attribution": "来源：中国政府网",
+      "collectedAt": "2026-07-06T15:31:46.697297+00:00"
+    },
+    {
+      "title": "税收数据显示：我国具身智能产业总体发展向好",
+      "url": "https://www.gov.cn/lianbo/202607/content_7073860.htm",
+      "sourceId": "gov_cn_shuju",
+      "sourceName": "中国政府网-数据栏目",
+      "attribution": "来源：中国政府网",
+      "collectedAt": "2026-07-06T15:31:46.697385+00:00"
+    }
+  ]
+}

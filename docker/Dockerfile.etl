@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+WORKDIR /app
+RUN pip install --no-cache-dir pandas requests beautifulsoup4 openpyxl -q
+COPY scripts/spark_etl_batch.py scripts/crawl_open_data.py scripts/import_nbs_excel.py scripts/import_shanghai_csv.py /app/scripts/
+COPY scripts/crawl-sources.json /app/scripts/
+COPY health-portal-backend/src/main/resources/data /app/health-portal-backend/src/main/resources/data
+COPY data /app/data
+ENV PYTHONUNBUFFERED=1
+EXPOSE 8090
+CMD ["python", "-m", "http.server", "8090"]
