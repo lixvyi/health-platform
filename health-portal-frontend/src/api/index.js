@@ -18,6 +18,16 @@ export const portalApi = {
   aiChat: (data) => http.post('/ai/chat', data)
 }
 
+// 症状自查API
+export const symptomApi = {
+  // 获取身体部位树
+  getBodyParts: () => http.get('/v1/body-parts'),
+  // 获取指定部位下的症状
+  getSymptomsByPartId: (partId) => http.get('/v1/symptoms', { params: { partId } }),
+  // 症状自查
+  checkSymptoms: (symptomIds) => http.post('/v1/check', { symptomIds })
+}
+
 export const adminApi = {
   login: (data) => http.post('/auth/login', data),
   contents: (params) => http.get('/admin/contents', { params }),
