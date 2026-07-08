@@ -1,0 +1,252 @@
+{
+  "generatedAt": "2026-07-08T15:57:53.969505+08:00",
+  "mode": "normalized-export-no-database-write",
+  "datasets": [
+    {
+      "datasetCode": "HOSPITAL_DIRECTORY_2024",
+      "datasetName": "全国医院数据库",
+      "sourceFile": "data\\external-import\\hospitals\\2024年最新全国医院数据库-省市县医院名单数据（50599家）.xlsx",
+      "sourceSha256": "c98d9739b054397d24e3598c6b50635f5527792ad52921d6656feaea321f2c26",
+      "recordCount": 50599,
+      "duplicateCount": 2001,
+      "errorCount": 193,
+      "warnings": [
+        "存在 2001 条医院名称重复记录；按来源行保留，不能仅凭名称合并院区。"
+      ]
+    },
+    {
+      "datasetCode": "PUBLIC_TERTIARY_HOSPITALS",
+      "datasetName": "全国三级公立综合医院等级名单",
+      "sourceFile": "data\\external-import\\insurance\\全国三级公立综合医院等级名单.xlsx",
+      "sourceSha256": "3124180b3782e0ec4686c380c7833bebff4b8bb613e6a9bb4ff72c34280072be",
+      "recordCount": 129,
+      "duplicateCount": 0,
+      "errorCount": 0,
+      "warnings": []
+    },
+    {
+      "datasetCode": "FUDAN_HOSPITAL_GRADES",
+      "datasetName": "复旦医院等级分档",
+      "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+      "sourceSha256": "b7b3442c418966929a621f618d6accee7a5c1400c8fc9130db13ba4f89c42043",
+      "recordCount": 100,
+      "duplicateCount": 0,
+      "errorCount": 0,
+      "warnings": [
+        "该文件只有等级和医院名称，不含数字名次、专科或年份，禁止当作专科Top 10。"
+      ]
+    },
+    {
+      "datasetCode": "NATIONAL_DRUG_CATALOG_2025",
+      "datasetName": "2025年国家医保药品目录",
+      "sourceFile": "data\\external-import\\other\\1.国家基本医疗保险、生育保险和工伤保险药品目录以及商业健康保险创新药品目录（2025年）.xlsx",
+      "sourceSha256": "fd105a076f2c4dfc28b77863766c503ec2d479f10ba4ec7561b73a30b1f53db8",
+      "recordCount": 3441,
+      "duplicateCount": 144,
+      "errorCount": 0,
+      "warnings": [
+        "1651 条记录没有独立剂型；保持空值，不从药名推断。"
+      ]
+    },
+    {
+      "datasetCode": "VACCINE_SCHEDULE_2021",
+      "datasetName": "国家免疫规划儿童免疫程序",
+      "sourceFile": "data\\external-import\\other\\国家免疫规划疫苗儿童免疫程序及说明（2021年版）.xlsx",
+      "sourceSha256": "64d3624ce14d59a399dfbec174b09d1fd48e841302e9a46f13f817419c964c74",
+      "recordCount": 13,
+      "duplicateCount": 0,
+      "errorCount": 0,
+      "warnings": []
+    },
+    {
+      "datasetCode": "VACCINE_HIV_GUIDANCE_2021",
+      "datasetName": "HIV感染母亲所生儿童接种建议",
+      "sourceFile": "data\\external-import\\other\\国家免疫规划疫苗儿童免疫程序及说明（2021年版）(1).xlsx",
+      "sourceSha256": "0a142c338f4490664da0fd97cccbbfde11ce523ae4fb88de5b6f0de3c87daf6e",
+      "recordCount": 16,
+      "duplicateCount": 0,
+      "errorCount": 0,
+      "warnings": []
+    }
+  ],
+  "crawlSources": [
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\crb.json",
+      "sourceName": "中国疾控中心·传染病",
+      "recordCount": 3,
+      "actualItems": 3,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\fsws.json",
+      "sourceName": "中国疾控中心·放射卫生",
+      "recordCount": 4,
+      "actualItems": 4,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\ggws.json",
+      "sourceName": "中国疾控中心·公共卫生事件",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\hjjk.json",
+      "sourceName": "中国疾控中心·环境健康",
+      "recordCount": 15,
+      "actualItems": 15,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\last-crawl.json",
+      "status": "invalid",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\mxfcrxjb.json",
+      "sourceName": "中国疾控中心·慢性非传染性疾病",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\mygh.json",
+      "sourceName": "中国疾控中心·免疫规划",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\yckz.json",
+      "sourceName": "中国疾控中心·烟草控制",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\yyjk.json",
+      "sourceName": "中国疾控中心·营养与健康",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\zyjk.json",
+      "sourceName": "中国疾控中心·职业健康与中毒控制",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\cms\\gov_cn_zhengce.json",
+      "sourceName": "中国政府网-最新政策",
+      "recordCount": 8,
+      "actualItems": 8,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\cms\\internet_data_news.json",
+      "sourceName": "互联网采集-数据与卫生资讯",
+      "recordCount": 33,
+      "actualItems": 33,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\cms\\internet_health_mirror.json",
+      "sourceName": "互联网采集-健康相关",
+      "recordCount": 2,
+      "actualItems": 2,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\cms\\nhc_gov_jkj.json",
+      "sourceName": "国家卫健委-健康科普",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\cms\\nhc_gov_zcjd.json",
+      "sourceName": "国家卫健委-政策解读",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\cms\\people_health_channel.json",
+      "sourceName": "人民网健康频道",
+      "recordCount": 5,
+      "actualItems": 5,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\cms\\people_health_lifestyle.json",
+      "sourceName": "人民网健康·生活方式",
+      "recordCount": 8,
+      "actualItems": 8,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\cms\\seed_health_knowledge.json",
+      "sourceName": "官方健康指南科普种子库",
+      "recordCount": 15,
+      "actualItems": 15,
+      "seedUrlCount": 15,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\internet\\gov_cn_shuju.json",
+      "sourceName": "中国政府网-数据栏目",
+      "recordCount": 3,
+      "actualItems": 3,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\internet\\stats_gov_cn_health.json",
+      "sourceName": "国家统计局官网-卫生公开信息",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\internet\\stats_gov_cn_sj.json",
+      "sourceName": "国家统计局-数据发布栏目",
+      "recordCount": 107,
+      "actualItems": 80,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\internet\\stats_gov_cn_tujie.json",
+      "sourceName": "中国政府网-数据图解",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\nhc\\nhc_kepu.json",
+      "status": "invalid",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    }
+  ]
+}

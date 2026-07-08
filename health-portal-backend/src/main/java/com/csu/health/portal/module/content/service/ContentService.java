@@ -8,10 +8,12 @@ import com.csu.health.portal.module.content.entity.CmsApp;
 import com.csu.health.portal.module.content.entity.CmsBanner;
 import com.csu.health.portal.module.content.entity.CmsContent;
 import com.csu.health.portal.module.content.entity.CmsSiteConfig;
+import com.csu.health.portal.module.content.entity.KnowledgeCategory;
 import com.csu.health.portal.module.content.mapper.CmsAppMapper;
 import com.csu.health.portal.module.content.mapper.CmsBannerMapper;
 import com.csu.health.portal.module.content.mapper.CmsContentMapper;
 import com.csu.health.portal.module.content.mapper.CmsSiteConfigMapper;
+import com.csu.health.portal.module.content.mapper.KnowledgeCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -32,29 +34,68 @@ public class ContentService {
     private final CmsBannerMapper bannerMapper;
     private final CmsAppMapper appMapper;
     private final CmsSiteConfigMapper siteConfigMapper;
+    private final KnowledgeCategoryMapper knowledgeCategoryMapper;
 
     @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
 
     public ContentService(CmsContentMapper contentMapper, CmsBannerMapper bannerMapper,
-                          CmsAppMapper appMapper, CmsSiteConfigMapper siteConfigMapper) {
+                          CmsAppMapper appMapper, CmsSiteConfigMapper siteConfigMapper,
+                          KnowledgeCategoryMapper knowledgeCategoryMapper) {
         this.contentMapper = contentMapper;
         this.bannerMapper = bannerMapper;
         this.appMapper = appMapper;
         this.siteConfigMapper = siteConfigMapper;
+        this.knowledgeCategoryMapper = knowledgeCategoryMapper;
     }
 
     public Page<CmsContent> pageContent(String categoryCode, String keyword, Integer status, int page, int size) {
-        long total = contentMapper.countByCondition(categoryCode, keyword, status);
-        int offset = (page - 1) * size;
-        List<CmsContent> records = contentMapper.selectPageByCondition(categoryCode, keyword, status, offset, size);
-        Page<CmsContent> result = new Page<>(page, size, total);
+        return pageContent(categoryCode, null, keyword, status, page, size);
+    }
+
+    public Page<CmsContent> pageContent(String categoryCode, String knowledgeCategoryCode,
+                                        String keyword, Integer status, int page, int size) {
+        int safePage = Math.max(1, page);
+        int safeSize = Math.min(100, Math.max(1, size));
+        long total = contentMapper.countByCondition(categoryCode, knowledgeCategoryCode, keyword, status);
+        int offset = (safePage - 1) * safeSize;
+        List<CmsContent> records = contentMapper.selectPageByCondition(
+                categoryCode, knowledgeCategoryCode, keyword, status, offset, safeSize);
+        Page<CmsContent> result = new Page<>(safePage, safeSize, total);
         result.setRecords(records);
         return result;
     }
 
     public Page<CmsContent> pagePublished(String categoryCode, String keyword, int page, int size) {
         return pageContent(categoryCode, keyword, 1, page, size);
+    }
+
+    public Page<CmsContent> pagePublished(String categoryCode, String knowledgeCategoryCode,
+                                          String keyword, int page, int size) {
+        return pageContent(categoryCode, knowledgeCategoryCode, keyword, 1, page, size);
+    }
+
+    public List<KnowledgeCategory> listKnowledgeCategories() {
+        List<KnowledgeCategory> categories = knowledgeCategoryMapper.selectList(new LambdaQueryWrapper<KnowledgeCategory>()
+                .eq(KnowledgeCategory::getStatus, 1)
+                .orderByAsc(KnowledgeCategory::getSortOrder, KnowledgeCategory::getId));
+        categories.forEach(category -> category.setIcon(iconForCategory(category.getCode())));
+        return categories;
+    }
+
+    private String iconForCategory(String code) {
+        if ("DISEASE".equals(code)) return "🏥";
+        if ("DRUG".equals(code)) return "💊";
+        if ("VACCINE".equals(code)) return "💉";
+        if ("EPIDEMIC".equals(code)) return "🦠";
+        if ("HEALTH_POPULARIZATION".equals(code)) return "❤️";
+        if ("MEDICAL_TERMS".equals(code)) return "📋";
+        return "📚";
+    }
+
+    public List<CmsContent> relatedPublished(Long id, int limit) {
+        getPublishedDetailWithoutIncrement(id);
+        return contentMapper.selectRelated(id, Math.min(10, Math.max(1, limit)));
     }
 
     public CmsContent getById(Long id) {
@@ -66,12 +107,17 @@ public class ContentService {
     }
 
     public CmsContent getPublishedDetail(Long id) {
+        CmsContent content = getPublishedDetailWithoutIncrement(id);
+        contentMapper.incrementViewCount(id);
+        content.setViewCount(content.getViewCount() + 1);
+        return content;
+    }
+
+    private CmsContent getPublishedDetailWithoutIncrement(Long id) {
         CmsContent content = getById(id);
         if (content.getStatus() != 1) {
             throw new BusinessException("内容未发布");
         }
-        contentMapper.incrementViewCount(id);
-        content.setViewCount(content.getViewCount() + 1);
         return content;
     }
 
@@ -83,6 +129,7 @@ public class ContentService {
         entity.setContent(req.getContent());
         entity.setCoverUrl(req.getCoverUrl());
         entity.setAuthor(req.getAuthor());
+        copyMedicalMetadata(req, entity, true);
         entity.setStatus(req.getStatus() == null ? 0 : req.getStatus());
         entity.setPublishTime(req.getPublishTime() == null ? LocalDateTime.now() : req.getPublishTime());
         entity.setCreatedBy(userId);
@@ -102,6 +149,7 @@ public class ContentService {
         entity.setContent(req.getContent());
         entity.setCoverUrl(req.getCoverUrl());
         entity.setAuthor(req.getAuthor());
+        copyMedicalMetadata(req, entity, false);
         if (req.getStatus() != null) {
             entity.setStatus(req.getStatus());
         }
@@ -283,5 +331,22 @@ public class ContentService {
         if (redisTemplate != null) {
             redisTemplate.delete("portal:stats");
         }
+    }
+
+    private static void copyMedicalMetadata(ContentSaveRequest req, CmsContent entity, boolean create) {
+        entity.setSourceUrl(req.getSourceUrl());
+        entity.setSourceName(req.getSourceName());
+        entity.setSourcePublishDate(req.getSourcePublishDate());
+        entity.setPublisher(req.getPublisher());
+        entity.setLastReviewTime(req.getLastReviewTime());
+        entity.setTargetAudience(req.getTargetAudience());
+        entity.setContentType(create && req.getContentType() == null ? "ARTICLE" : req.getContentType());
+        entity.setIsMedical(create && req.getIsMedical() == null ? 0 : req.getIsMedical());
+        entity.setHasEmergencyWarning(create && req.getHasEmergencyWarning() == null
+                ? 0 : req.getHasEmergencyWarning());
+        entity.setContraindications(req.getContraindications());
+        entity.setAdverseReactions(req.getAdverseReactions());
+        entity.setVerificationStatus(create && req.getVerificationStatus() == null
+                ? "UNVERIFIED" : req.getVerificationStatus());
     }
 }

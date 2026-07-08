@@ -50,7 +50,7 @@ class MyBatisNativeSessionTest {
     void testDynamicSqlPageQuery() {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             CmsContentMapper mapper = session.getMapper(CmsContentMapper.class);
-            List<CmsContent> list = mapper.selectPageByCondition("NEWS", null, 1, 0, 10);
+            List<CmsContent> list = mapper.selectPageByCondition("NEWS", null, null, 1, 0, 10);
             Assertions.assertFalse(list.isEmpty());
         }
     }

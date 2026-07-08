@@ -1,0 +1,802 @@
+[
+  {
+    "grade": "A++++",
+    "hospitalName": "中国人民解放军总医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 1
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "中国医学科学院北京协和医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 2
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "北京大学第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 3
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "北京大学第三医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 4
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "中国医科大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 5
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "上海交通大学医学院附属仁济医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 6
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "上海交通大学医学院附属瑞金医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 7
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "复旦大学附属中山医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 8
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "复旦大学附属华山医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 9
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "浙江大学医学院附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 10
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "浙江大学医学院附属第二医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 11
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "郑州大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 12
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "华中科技大学同济医学院附属协和医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 13
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "华中科技大学同济医学院附属同济医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 14
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "中南大学湘雅二医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 15
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "中南大学湘雅医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 16
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "中山大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 17
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "南方医科大学南方医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 18
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "四川大学华西医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 19
+  },
+  {
+    "grade": "A++++",
+    "hospitalName": "空军军医大学第一附属医院（西京医院）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 20
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "中日友好医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 21
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "中国医学科学院阜外医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 22
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "中国医学科学院肿瘤医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 23
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "北京大学人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 24
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "首都医科大学附属北京儿童医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 25
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "首都医科大学附属北京天坛医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 26
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "首都医科大学附属北京同仁医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 27
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "上海市第六人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 28
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "上海交通大学医学院附属第九人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 29
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "复旦大学附属儿科医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 30
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "复旦大学附属肿瘤医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 31
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "海军军医大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 32
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "江苏省人民医院（南京医科大学第一附属医院）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 33
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "南京大学医学院附属鼓楼医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 34
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "山东大学齐鲁医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 35
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "广东省人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 36
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "广州医科大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 37
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "中山大学肿瘤防治中心",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 38
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "陆军军医大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 39
+  },
+  {
+    "grade": "A+++",
+    "hospitalName": "四川省人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 40
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "北京积水潭医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 41
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "首都医科大学附属北京安贞医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 42
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "首都医科大学宣武医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 43
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "中国医科大学附属盛京医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 44
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "上海市肺科医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 45
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "上海交通大学医学院附属新华医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 46
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "复旦大学附属眼耳鼻喉科医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 47
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "中国人民解放军东部战区总医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 48
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "东南大学附属中大医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 49
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "苏州大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 50
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "浙江大学医学院附属邵逸夫医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 51
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "福建医科大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 52
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "南昌大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 53
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "山东第一医科大学附属省立医院（山东省立医院）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 54
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "青岛大学附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 55
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "武汉大学人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 56
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "武汉大学中南医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 57
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "中山大学附属第三医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 58
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "重庆医科大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 59
+  },
+  {
+    "grade": "A++",
+    "hospitalName": "四川大学华西口腔医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 60
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "北京大学口腔医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 61
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "北京大学肿瘤医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 62
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "北京医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 63
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "首都医科大学附属北京友谊医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 64
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "首都医科大学附属北京朝阳医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 65
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "天津医科大学肿瘤医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 66
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "天津医科大学总医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 67
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "吉林大学第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 68
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "哈尔滨医科大学附属第二医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 69
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "浙江大学医学院附属儿童医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 70
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "中国科学技术大学附属第一医院（安徽省立医院）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 71
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "安徽医科大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 72
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "中南大学湘雅三医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 73
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "广州市妇女儿童医疗中心",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 74
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "中山大学中山眼科中心",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 75
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "中山大学孙逸仙纪念医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 76
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "南方医科大学珠江医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 77
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "重庆医科大学附属儿童医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 78
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "四川大学华西第二医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 79
+  },
+  {
+    "grade": "A+",
+    "hospitalName": "西安交通大学第一附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 80
+  },
+  {
+    "grade": "A",
+    "hospitalName": "北京大学第六医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 81
+  },
+  {
+    "grade": "A",
+    "hospitalName": "首都医科大学附属北京世纪坛医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 82
+  },
+  {
+    "grade": "A",
+    "hospitalName": "中国医学科学院血液病医院（研究所）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 83
+  },
+  {
+    "grade": "A",
+    "hospitalName": "中国人民解放军北部战区总医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 84
+  },
+  {
+    "grade": "A",
+    "hospitalName": "哈尔滨医科大学附属第一医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 85
+  },
+  {
+    "grade": "A",
+    "hospitalName": "上海市胸科医院（暨上海交通大学医学院附属胸科医院）",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 86
+  },
+  {
+    "grade": "A",
+    "hospitalName": "上海市第一人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 87
+  },
+  {
+    "grade": "A",
+    "hospitalName": "上海市精神卫生中心",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 88
+  },
+  {
+    "grade": "A",
+    "hospitalName": "上海交通大学医学院附属上海儿童医学中心",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 89
+  },
+  {
+    "grade": "A",
+    "hospitalName": "复旦大学附属妇产科医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 90
+  },
+  {
+    "grade": "A",
+    "hospitalName": "海军军医大学第二附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 91
+  },
+  {
+    "grade": "A",
+    "hospitalName": "浙江大学医学院附属妇产科医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 92
+  },
+  {
+    "grade": "A",
+    "hospitalName": "温州医科大学附属眼视光医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 93
+  },
+  {
+    "grade": "A",
+    "hospitalName": "福建医科大学附属协和医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 94
+  },
+  {
+    "grade": "A",
+    "hospitalName": "河南省人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 95
+  },
+  {
+    "grade": "A",
+    "hospitalName": "武汉大学口腔医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 96
+  },
+  {
+    "grade": "A",
+    "hospitalName": "深圳市人民医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 97
+  },
+  {
+    "grade": "A",
+    "hospitalName": "陆军军医大学第二附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 98
+  },
+  {
+    "grade": "A",
+    "hospitalName": "西安交通大学第二附属医院",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 99
+  },
+  {
+    "grade": "A",
+    "hospitalName": "空军军医大学第二附属医院(唐都医院)",
+    "sourceName": "用户提供的复旦医院等级分档表",
+    "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
+    "sourceSheet": "Sheet1",
+    "sourceRow": 100
+  }
+]

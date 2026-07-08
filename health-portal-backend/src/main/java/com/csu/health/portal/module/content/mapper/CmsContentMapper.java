@@ -13,12 +13,14 @@ public interface CmsContentMapper extends BaseMapper<CmsContent> {
     CmsContent selectByIdXml(Long id);
 
     List<CmsContent> selectPageByCondition(@Param("categoryCode") String categoryCode,
+                                           @Param("knowledgeCategoryCode") String knowledgeCategoryCode,
                                            @Param("keyword") String keyword,
                                            @Param("status") Integer status,
                                            @Param("offset") int offset,
                                            @Param("pageSize") int pageSize);
 
     long countByCondition(@Param("categoryCode") String categoryCode,
+                          @Param("knowledgeCategoryCode") String knowledgeCategoryCode,
                           @Param("keyword") String keyword,
                           @Param("status") Integer status);
 
@@ -35,4 +37,7 @@ public interface CmsContentMapper extends BaseMapper<CmsContent> {
     List<CmsContent> selectRecentPublished(@Param("categoryCode") String categoryCode,
                                            @Param("days") int days,
                                            @Param("limit") int limit);
+
+    List<CmsContent> selectRelated(@Param("contentId") Long contentId,
+                                   @Param("limit") int limit);
 }

@@ -4,7 +4,10 @@
 <mapper namespace="com.csu.health.portal.module.content.mapper.CmsContentMapper">
 
   <sql id="contentColumns">
-    id, category_code, title, summary, content, source_url, cover_url, author,
+    id, category_code, title, summary, content, source_url, source_name,
+    source_publish_date, publisher, last_review_time, target_audience, content_type,
+    is_medical, has_emergency_warning, contraindications, adverse_reactions,
+    verification_status, cover_url, author,
     view_count, status, publish_time, created_by, created_at, updated_at
   </sql>
 
@@ -26,7 +29,22 @@
         AND category_code = #{categoryCode}
       </if>
       <if test="keyword != null and keyword != ''">
-        AND title LIKE concat('%', #{keyword}, '%')
+        AND (
+          title LIKE concat('%', #{keyword}, '%')
+          OR summary LIKE concat('%', #{keyword}, '%')
+          OR author LIKE concat('%', #{keyword}, '%')
+          OR source_name LIKE concat('%', #{keyword}, '%')
+        )
+      </if>
+      <if test="knowledgeCategoryCode != null and knowledgeCategoryCode != ''">
+        AND EXISTS (
+          SELECT 1
+          FROM content_category_rel ccr
+          JOIN knowledge_category kc ON kc.category_code = ccr.category_code
+          WHERE ccr.content_id = cms_content.id
+            AND kc.category_code = #{knowledgeCategoryCode}
+            AND kc.status = 1
+        )
       </if>
       <if test="status != null">
         AND status = #{status}
@@ -43,7 +61,22 @@
         AND category_code = #{categoryCode}
       </if>
       <if test="keyword != null and keyword != ''">
-        AND title LIKE concat('%', #{keyword}, '%')
+        AND (
+          title LIKE concat('%', #{keyword}, '%')
+          OR summary LIKE concat('%', #{keyword}, '%')
+          OR author LIKE concat('%', #{keyword}, '%')
+          OR source_name LIKE concat('%', #{keyword}, '%')
+        )
+      </if>
+      <if test="knowledgeCategoryCode != null and knowledgeCategoryCode != ''">
+        AND EXISTS (
+          SELECT 1
+          FROM content_category_rel ccr
+          JOIN knowledge_category kc ON kc.category_code = ccr.category_code
+          WHERE ccr.content_id = cms_content.id
+            AND kc.category_code = #{knowledgeCategoryCode}
+            AND kc.status = 1
+        )
       </if>
       <if test="status != null">
         AND status = #{status}
@@ -54,10 +87,16 @@
   <!-- 新增 -->
   <insert id="insertXml" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO cms_content (
-      category_code, title, summary, content, cover_url, author,
+      category_code, title, summary, content, source_url, source_name,
+      source_publish_date, publisher, last_review_time, target_audience, content_type,
+      is_medical, has_emergency_warning, contraindications, adverse_reactions,
+      verification_status, cover_url, author,
       view_count, status, publish_time, created_by
     ) VALUES (
-      #{categoryCode}, #{title}, #{summary}, #{content}, #{coverUrl}, #{author},
+      #{categoryCode}, #{title}, #{summary}, #{content}, #{sourceUrl}, #{sourceName},
+      #{sourcePublishDate}, #{publisher}, #{lastReviewTime}, #{targetAudience}, #{contentType},
+      #{isMedical}, #{hasEmergencyWarning}, #{contraindications}, #{adverseReactions},
+      #{verificationStatus}, #{coverUrl}, #{author},
       #{viewCount}, #{status}, #{publishTime}, #{createdBy}
     )
   </insert>
@@ -77,6 +116,42 @@
       </if>
       <if test="content != null">
         content = #{content},
+      </if>
+      <if test="sourceUrl != null">
+        source_url = #{sourceUrl},
+      </if>
+      <if test="sourceName != null">
+        source_name = #{sourceName},
+      </if>
+      <if test="sourcePublishDate != null">
+        source_publish_date = #{sourcePublishDate},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher},
+      </if>
+      <if test="lastReviewTime != null">
+        last_review_time = #{lastReviewTime},
+      </if>
+      <if test="targetAudience != null">
+        target_audience = #{targetAudience},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType},
+      </if>
+      <if test="isMedical != null">
+        is_medical = #{isMedical},
+      </if>
+      <if test="hasEmergencyWarning != null">
+        has_emergency_warning = #{hasEmergencyWarning},
+      </if>
+      <if test="contraindications != null">
+        contraindications = #{contraindications},
+      </if>
+      <if test="adverseReactions != null">
+        adverse_reactions = #{adverseReactions},
+      </if>
+      <if test="verificationStatus != null">
+        verification_status = #{verificationStatus},
       </if>
       <if test="coverUrl != null">
         cover_url = #{coverUrl},
@@ -122,6 +197,22 @@
     WHERE status = 1
       AND category_code = #{categoryCode}
       AND publish_time >= DATE_SUB(NOW(), INTERVAL #{days} DAY)
+    ORDER BY publish_time DESC, id DESC
+    LIMIT #{limit}
+  </select>
+
+  <select id="selectRelated" resultType="com.csu.health.portal.module.content.entity.CmsContent">
+    <include refid="contentTable"/>
+    WHERE status = 1
+      AND id != #{contentId}
+      AND EXISTS (
+        SELECT 1
+        FROM content_category_rel target_rel
+        JOIN content_category_rel candidate_rel
+          ON candidate_rel.category_code = target_rel.category_code
+        WHERE target_rel.content_id = #{contentId}
+          AND candidate_rel.content_id = cms_content.id
+      )
     ORDER BY publish_time DESC, id DESC
     LIMIT #{limit}
   </select>
