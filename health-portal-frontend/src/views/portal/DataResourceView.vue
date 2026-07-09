@@ -110,6 +110,7 @@
             v-if="activeIndicator"
             :title="activeIndicator.name"
             :values="activeIndicator.values"
+            :unit="indicatorUnit"
             :height="300"
             chart-type="bar"
             :show-notice="false"
