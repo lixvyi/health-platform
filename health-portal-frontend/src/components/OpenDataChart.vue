@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import DataSourceNotice from './DataSourceNotice.vue'
 
@@ -43,8 +43,15 @@ const render = () => {
   })
 }
 
+const safeRender = () => {
+  nextTick(() => {
+    // 确保 DOM 渲染完毕后再初始化图表（解决对话框过渡动画导致容器尺寸为 0 的问题）
+    render()
+  })
+}
+
 onMounted(() => {
-  render()
+  safeRender()
   window.addEventListener('resize', () => chart?.resize())
 })
 
@@ -53,7 +60,7 @@ onUnmounted(() => {
   chart = null
 })
 
-watch(() => props.values, render, { deep: true })
+watch(() => props.values, safeRender, { deep: true })
 </script>
 
 <style scoped>
