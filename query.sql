@@ -1,0 +1,1 @@
+﻿SELECT 'cms_content' as table_name, COUNT(*) as count FROM cms_content UNION ALL SELECT 'medical_hospital', COUNT(*) FROM medical_hospital UNION ALL SELECT 'medical_specialty_ranking', COUNT(*) FROM medical_specialty_ranking UNION ALL SELECT 'medical_insurance_institution', COUNT(*) FROM medical_insurance_institution;

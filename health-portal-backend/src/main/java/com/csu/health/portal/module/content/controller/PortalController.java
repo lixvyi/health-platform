@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.List;
+import com.csu.health.portal.module.content.entity.KnowledgeCategory;
 
 @Tag(name = "公众门户")
 @RestController
@@ -29,16 +31,32 @@ public class PortalController {
     @GetMapping("/contents")
     public Result<Page<CmsContent>> contents(
             @RequestParam String categoryCode,
+            @RequestParam(required = false) String knowledgeCategoryCode,
             @RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
-        return Result.ok(contentService.pagePublished(categoryCode, keyword, page, size));
+        return Result.ok(contentService.pagePublished(
+                categoryCode, knowledgeCategoryCode, keyword, page, size));
     }
 
     @Operation(summary = "内容详情")
     @GetMapping("/contents/{id}")
     public Result<CmsContent> detail(@PathVariable Long id) {
         return Result.ok(contentService.getPublishedDetail(id));
+    }
+
+    @Operation(summary = "健康百科分类")
+    @GetMapping("/knowledge/categories")
+    public Result<List<KnowledgeCategory>> knowledgeCategories() {
+        return Result.ok(contentService.listKnowledgeCategories());
+    }
+
+    @Operation(summary = "相关推荐")
+    @GetMapping("/contents/{id}/related")
+    public Result<List<CmsContent>> related(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "6") int limit) {
+        return Result.ok(contentService.relatedPublished(id, limit));
     }
 
     @Operation(summary = "轮播图")

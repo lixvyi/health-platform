@@ -11,7 +11,9 @@ const routes = [
       { path: 'news', name: 'news', component: () => import('../views/portal/ContentListView.vue'), props: { category: 'NEWS', title: '新闻中心' } },
       { path: 'notice', name: 'notice', component: () => import('../views/portal/ContentListView.vue'), props: { category: 'NOTICE', title: '通知公告' } },
       { path: 'policy', name: 'policy', component: () => import('../views/portal/ContentListView.vue'), props: { category: 'POLICY', title: '卫生政策' } },
-      { path: 'knowledge', name: 'knowledge', component: () => import('../views/portal/ContentListView.vue'), props: { category: 'KNOWLEDGE', title: '健康知识库' } },
+      { path: 'knowledge', name: 'knowledge', component: () => import('../views/portal/KnowledgeView.vue') },
+      { path: 'medical', name: 'medical', component: () => import('../views/portal/MedicalResourceView.vue') },
+      { path: 'medical/hospitals/:id', name: 'hospitalDetail', component: () => import('../views/portal/HospitalDetailView.vue') },
       { path: 'content/:id', name: 'contentDetail', component: () => import('../views/portal/ContentDetailView.vue') },
       { path: 'apps', name: 'apps', component: () => import('../views/portal/AppsView.vue') },
       { path: 'data', name: 'data', component: () => import('../views/portal/DataResourceView.vue') },
@@ -36,7 +38,8 @@ const routes = [
       { path: 'about', component: () => import('../views/admin/AboutManageView.vue') },
       { path: 'data-collect', component: () => import('../views/admin/DataCollectView.vue') }
     ]
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: 'notFound', component: () => import('../views/portal/NotFoundView.vue') }
 ]
 
 const router = createRouter({

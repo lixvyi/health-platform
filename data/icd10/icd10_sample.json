@@ -1,0 +1,52 @@
+[
+  {
+    "code": "A00.0",
+    "name": "霍乱",
+    "description": "由O1群霍乱弧菌引起的急性肠道传染病"
+  },
+  {
+    "code": "A01.0",
+    "name": "伤寒",
+    "description": "由伤寒沙门菌引起的急性传染病"
+  },
+  {
+    "code": "I10",
+    "name": "原发性高血压",
+    "description": "原因不明的高血压"
+  },
+  {
+    "code": "E11",
+    "name": "2型糖尿病",
+    "description": "非胰岛素依赖型糖尿病"
+  },
+  {
+    "code": "J06.9",
+    "name": "急性上呼吸道感染",
+    "description": "未特指的急性上呼吸道感染"
+  },
+  {
+    "code": "K29.7",
+    "name": "胃炎",
+    "description": "未特指的胃炎"
+  },
+  {
+    "code": "M54.5",
+    "name": "腰痛",
+    "description": "下背痛"
+  },
+  {
+    "code": "J45",
+    "name": "哮喘",
+    "description": "支气管哮喘"
+  },
+  {
+    "code": "I25.1",
+    "name": "动脉粥样硬化性心脏病",
+    "description": "冠心病"
+  },
+  {
+    "code": "C34",
+    "name": "支气管和肺恶性肿瘤",
+    "description": "肺癌"
+  }
+]

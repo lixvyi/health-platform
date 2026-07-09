@@ -8,7 +8,8 @@
           <router-link to="/news">新闻中心</router-link>
           <router-link to="/notice">通知公告</router-link>
           <router-link to="/policy">卫生政策</router-link>
-          <router-link to="/knowledge">健康知识库</router-link>
+          <router-link to="/knowledge">健康百科</router-link>
+          <router-link to="/medical">医疗资源</router-link>
           <router-link to="/data">数据资源</router-link>
           <router-link to="/data-pool">数据资源池</router-link>
           <router-link to="/apps">应用中心</router-link>

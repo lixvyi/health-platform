@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import time
@@ -50,7 +51,12 @@ def load_config() -> dict:
 
 
 def load_db_config() -> dict:
-    cfg = {"host": "localhost", "user": "root", "password": "060508", "database": "health_portal"}
+    cfg = {
+        "host": os.getenv("HEALTH_DB_HOST", "localhost"),
+        "user": os.getenv("HEALTH_DB_USER", "root"),
+        "password": os.getenv("HEALTH_DB_PASSWORD", ""),
+        "database": os.getenv("HEALTH_DB_NAME", "health_portal"),
+    }
     if JDBC.exists():
         for line in JDBC.read_text(encoding="utf-8").splitlines():
             line = line.strip()

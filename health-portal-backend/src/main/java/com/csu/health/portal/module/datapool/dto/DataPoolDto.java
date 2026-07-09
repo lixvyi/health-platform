@@ -14,6 +14,7 @@ public class DataPoolDto {
         private List<Layer> layers;
         private PoolStats stats;
         private List<String> techStack;
+        private List<ResourceDataset> datasets;
     }
 
     @Data
@@ -30,8 +31,25 @@ public class DataPoolDto {
         private int shanghaiDatasets;
         private int internetItems;
         private int openDataFiles;
+        private int healthResourceDatasets;
+        private int healthResourceRecords;
         private int totalRecords;
         private String lastCollectTime;
+    }
+
+    @Data
+    public static class ResourceDataset {
+        private String datasetCode;
+        private String datasetName;
+        private String sourceType;
+        private String sourceName;
+        private String sourceFile;
+        private String status;
+        private int recordCount;
+        private int errorCount;
+        private String lastImportedAt;
+        private String officialUrl;
+        private String description;
     }
 
     @Data
