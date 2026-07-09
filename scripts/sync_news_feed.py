@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-"""将政策速递、资源池更新、互联网采集结果同步到新闻中心（NEWS）"""
+"""将资源池更新、互联网资讯同步到新闻中心（NEWS）。
+
+新闻中心不再复制卫生政策内容，避免与 POLICY 栏目重复。
+"""
 from __future__ import annotations
 
 import json
@@ -23,7 +26,12 @@ JDBC = ROOT / "health-portal-backend" / "src" / "main" / "resources" / "jdbc.pro
 
 NEWS_KW = [
     "健康", "卫生", "医疗", "数据", "统计", "GDP", "CPI", "PMI", "发布", "就业", "收入",
-    "医保", "养老", "疾控", "公卫", "医院", "疫苗", "规划", "政策", "纲要", "解读",
+    "医保", "养老", "疾控", "公卫", "医院", "疫苗",
+]
+
+POLICY_HINT_KW = [
+    "规划", "纲要", "条例", "意见", "通知", "方案", "规定", "办法", "政策", "解读",
+    "目录", "标准", "规范", "公告", "批复", "分类", "制度",
 ]
 
 
@@ -62,6 +70,8 @@ def load_crawl_json(cid: str) -> dict | None:
 
 
 def match_news(title: str) -> bool:
+    if any(k in title for k in POLICY_HINT_KW):
+        return False
     return any(k in title for k in NEWS_KW)
 
 
@@ -76,7 +86,16 @@ def build_content(title: str, url: str, summary: str, attribution: str) -> str:
 
 
 def upsert_news(cur, source_url: str, title: str, summary: str, content: str, author: str) -> str:
-    cur.execute("SELECT id FROM cms_content WHERE source_url = %s LIMIT 1", (source_url,))
+    cur.execute(
+        "SELECT id FROM cms_content WHERE category_code='POLICY' AND source_url = %s LIMIT 1",
+        (source_url,),
+    )
+    if cur.fetchone():
+        return "skipped_policy"
+    cur.execute(
+        "SELECT id FROM cms_content WHERE category_code='NEWS' AND source_url = %s LIMIT 1",
+        (source_url,),
+    )
     row = cur.fetchone()
     if row:
         cur.execute(
@@ -118,26 +137,6 @@ def sync_pool_daily(cur) -> int:
     return 1
 
 
-def sync_policies_as_news(cur, days: int = 3) -> int:
-    n = 0
-    cur.execute(
-        "SELECT title, summary, source_url, content FROM cms_content "
-        "WHERE category_code='POLICY' AND status=1 "
-        "AND publish_time >= DATE_SUB(NOW(), INTERVAL %s DAY)",
-        (days,),
-    )
-    for title, summary, url, _ in cur.fetchall():
-        if not url:
-            continue
-        news_key = f"news:policy:{url}"
-        news_title = f"[政策速递] {title}"
-        s = summary or title[:100]
-        content = build_content(title, url, s, "来源：近期政府公开政策，详见原文")
-        if upsert_news(cur, news_key, news_title, s, content, "政策速递·自动同步") == "inserted":
-            n += 1
-    return n
-
-
 def sync_internet_as_news(cur) -> int:
     n = 0
     seen = set()
@@ -171,12 +170,11 @@ def main() -> int:
     )
     cur = conn.cursor()
     pool_n = sync_pool_daily(cur)
-    policy_n = sync_policies_as_news(cur, 3)
     internet_n = sync_internet_as_news(cur)
     conn.commit()
     cur.close()
     conn.close()
-    print(f"NEWS-SYNC pool={pool_n} policy={policy_n} internet={internet_n}")
+    print(f"NEWS-SYNC pool={pool_n} policy=disabled internet={internet_n}")
     return 0
 
 

@@ -241,6 +241,7 @@ def mirror_internet_crawl(source: dict) -> dict:
     crawl_ids = source.get("crawlIds", [])
     keywords = source.get("keywords", HEALTH_KW)
     require_health = source.get("requireHealthKeyword", True)
+    exclude_policy = source.get("excludePolicyKeyword", False)
     default_category = source.get("categoryCode", "NEWS")
     items = []
     seen = set()
@@ -260,13 +261,15 @@ def mirror_internet_crawl(source: dict) -> dict:
                 continue
             if not require_health and keywords and not match_keywords(title, keywords):
                 continue
+            if exclude_policy and match_keywords(title, POLICY_KW):
+                continue
             seen.add(url)
             items.append({
                 "title": title,
                 "url": url,
                 "sourceId": source["id"],
                 "sourceName": raw.get("sourceName") or source["name"],
-                "categoryCode": classify_category(title, default_category),
+                "categoryCode": default_category,
                 "attribution": raw.get("attribution") or source.get("attribution", ""),
                 "collectedAt": raw.get("collectedAt") or datetime.now(timezone.utc).isoformat(),
             })
