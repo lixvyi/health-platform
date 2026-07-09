@@ -1,0 +1,20 @@
+[
+  {
+    "sourceFile": "data\\policies\\国家基本医疗保险和生育保险药品目录数据信息202606291435.csv",
+    "sourceSheet": "CSV",
+    "sourceRow": 1591,
+    "reason": "药品名称或医疗项目编码为空"
+  },
+  {
+    "sourceFile": "data\\policies\\国家基本医疗保险和生育保险药品目录数据信息202606291435.csv",
+    "sourceSheet": "CSV",
+    "sourceRow": 1592,
+    "reason": "药品名称或医疗项目编码为空"
+  },
+  {
+    "sourceFile": "data\\policies\\国家基本医疗保险和生育保险药品目录数据信息202606291435.csv",
+    "sourceSheet": "CSV",
+    "sourceRow": 1593,
+    "reason": "药品名称或医疗项目编码为空"
+  }
+]

@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -26,6 +27,9 @@ import openpyxl
 ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL_ROOT = ROOT / "data" / "external-import"
 DEFAULT_OUTPUT = ROOT / "data" / "processed" / "health-resources"
+POLICY_ROOT = ROOT / "data" / "policies"
+POLICY_DRUG_CATALOG_CODE = "POLICY_NHSA_DRUG_CATALOG_2026"
+POLICY_DRUG_CATALOG_NAME = "国家医保药品目录数据信息"
 
 DATASET_META = {
     "hospitals": ("HOSPITAL_DIRECTORY_2024", "全国医院数据库"),
@@ -88,6 +92,11 @@ def single_file(folder: str, pattern: str) -> Path:
     return files[0]
 
 
+def policy_drug_catalog_file() -> Path | None:
+    files = sorted(POLICY_ROOT.glob("*药品目录数据信息202606291435.csv"))
+    return files[0] if files else None
+
+
 def workbook(path: Path):
     return openpyxl.load_workbook(path, read_only=True, data_only=True)
 
@@ -126,9 +135,137 @@ def load_processed_dataset(key: str) -> DatasetResult | None:
     result = DatasetResult(code, name, path)
     result.records = records
     result.errors = errors
-    result.warnings = list(summary.get("warnings") or [])
-    result.duplicate_count = int(summary.get("duplicateCount") or 0)
+    if key == "drugs":
+        result.errors = []
+        result.duplicate_count = count_duplicates(records, ("drugNumber", "drugName"))
+        missing_dosage = sum(1 for record in records if not clean(record.get("dosageForm")))
+        result.warnings = [f"{missing_dosage} 条记录没有独立剂型；保持空值，不从药名推断。"]
+        merge_policy_drug_catalog(result)
+    else:
+        result.warnings = list(summary.get("warnings") or [])
+        result.duplicate_count = int(summary.get("duplicateCount") or 0)
     return result
+
+
+def read_csv_rows(path: Path) -> list[dict[str, str]]:
+    last_error: Exception | None = None
+    for encoding in ("utf-8-sig", "gb18030"):
+        try:
+            with path.open(encoding=encoding, newline="") as stream:
+                return list(csv.DictReader(stream))
+        except UnicodeDecodeError as exc:
+            last_error = exc
+    raise RuntimeError(f"无法读取 CSV 编码：{path.relative_to(ROOT)}") from last_error
+
+
+def normalize_code(value: Any) -> str:
+    text = clean(value)
+    if re.fullmatch(r"\d+\.0+", text):
+        return str(int(float(text)))
+    return text
+
+
+def parse_policy_drug_catalog() -> DatasetResult | None:
+    path = policy_drug_catalog_file()
+    if path is None:
+        return None
+
+    result = DatasetResult(POLICY_DRUG_CATALOG_CODE, POLICY_DRUG_CATALOG_NAME, path)
+    source_rel = str(path.relative_to(ROOT))
+    seen: Counter[tuple[str, str]] = Counter()
+    rows = read_csv_rows(path)
+
+    for index, row in enumerate(rows, 2):
+        category_name = clean(row.get("结算项目名称")) or "医保药品"
+        dosage_form = clean(row.get("剂型名称"))
+        specification = clean(row.get("规格"))
+        self_pay_ratio = clean(row.get("首先自负比例"))
+        number = normalize_code(row.get("医疗项目编码"))
+        insurance_type = clean(row.get("目录等级"))
+        name = clean(row.get("药品名称"))
+        manufacturer = clean(row.get("生产厂家"))
+
+        if not name or not number:
+            result.errors.append({
+                "sourceFile": source_rel,
+                "sourceSheet": "CSV",
+                "sourceRow": index,
+                "reason": "药品名称或医疗项目编码为空",
+            })
+            continue
+
+        remark_parts = []
+        if specification:
+            remark_parts.append(f"规格：{specification}")
+        if self_pay_ratio:
+            remark_parts.append(f"首先自负比例：{self_pay_ratio}")
+        if manufacturer:
+            remark_parts.append(f"生产厂家：{manufacturer}")
+
+        seen[(number, name)] += 1
+        result.records.append({
+            "categoryCode": category_name,
+            "categoryName": category_name,
+            "drugNumber": number,
+            "drugName": name,
+            "dosageForm": dosage_form,
+            "insuranceType": insurance_type,
+            "remark": "；".join(remark_parts),
+            "catalogYear": 2026,
+            "sourceFile": source_rel,
+            "sourceSheet": "CSV",
+            "sourceRow": index,
+        })
+
+    result.duplicate_count = sum(v - 1 for v in seen.values() if v > 1)
+    result.warnings.append(
+        f"追加 {len(result.records)} 条来自 data/policies 的医保药品目录数据信息；保留 CSV 来源行号。"
+    )
+    return result
+
+
+def load_policy_drug_catalog() -> DatasetResult | None:
+    csv_result = parse_policy_drug_catalog()
+    path = DEFAULT_OUTPUT / f"{POLICY_DRUG_CATALOG_CODE}.json"
+    if not path.exists():
+        return csv_result
+
+    records = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(records, list):
+        raise RuntimeError(f"{path.relative_to(ROOT)} 不是记录数组")
+    result = DatasetResult(POLICY_DRUG_CATALOG_CODE, POLICY_DRUG_CATALOG_NAME, path)
+    result.records = records
+
+    error_path = DEFAULT_OUTPUT / f"{POLICY_DRUG_CATALOG_CODE}.errors.json"
+    if error_path.exists():
+        errors = json.loads(error_path.read_text(encoding="utf-8"))
+        result.errors = errors if isinstance(errors, list) else []
+    if csv_result is not None:
+        result.errors = csv_result.errors
+    result.duplicate_count = count_duplicates(records, ("drugNumber", "drugName"))
+    if csv_result is not None:
+        result.warnings = csv_result.warnings
+    else:
+        result.warnings.append(
+            f"追加 {len(result.records)} 条来自 data/policies 的医保药品目录数据信息；保留 CSV 来源行号。"
+        )
+    return result
+
+
+def count_duplicates(records: list[dict[str, Any]], fields: tuple[str, ...]) -> int:
+    seen = Counter(tuple(clean(record.get(field)) for field in fields) for record in records)
+    return sum(count - 1 for count in seen.values() if count > 1)
+
+
+def merge_policy_drug_catalog(result: DatasetResult) -> None:
+    policy_result = load_policy_drug_catalog()
+    if policy_result is None:
+        result.warnings.append("未找到 data/policies 中的医保药品目录数据信息 CSV。")
+        return
+    result.records.extend(policy_result.records)
+    result.errors.extend(policy_result.errors)
+    result.duplicate_count += policy_result.duplicate_count
+    result.warnings.extend(policy_result.warnings)
 
 
 def parse_hospitals() -> DatasetResult:
@@ -399,7 +536,10 @@ def load_dataset(key: str, from_excel: bool = False) -> DatasetResult:
         result = load_processed_dataset(key)
         if result is not None:
             return result
-    return EXCEL_PARSERS[key]()
+    result = EXCEL_PARSERS[key]()
+    if key == "drugs":
+        merge_policy_drug_catalog(result)
+    return result
 
 
 def audit_crawl_json() -> list[dict[str, Any]]:
@@ -432,11 +572,37 @@ def export_results(results: Iterable[DatasetResult], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     summaries = []
     for result in results:
+        records = result.records
+        errors = result.errors
+        if result.code == "NATIONAL_DRUG_CATALOG_2025":
+            policy_file = policy_drug_catalog_file()
+            policy_source = str(policy_file.relative_to(ROOT)) if policy_file else ""
+            if policy_source:
+                policy_export = parse_policy_drug_catalog()
+                policy_records = [
+                    record for record in result.records
+                    if record.get("sourceFile") == policy_source
+                ]
+                policy_errors = policy_export.errors if policy_export is not None else []
+                records = [
+                    record for record in result.records
+                    if record.get("sourceFile") != policy_source
+                ]
+                errors = [
+                    error for error in result.errors
+                    if error.get("sourceFile") != policy_source
+                ]
+                (output_dir / f"{POLICY_DRUG_CATALOG_CODE}.json").write_text(
+                    json.dumps(policy_records, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
+                (output_dir / f"{POLICY_DRUG_CATALOG_CODE}.errors.json").write_text(
+                    json.dumps(policy_errors, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
         (output_dir / f"{result.code}.json").write_text(
-            json.dumps(result.records, ensure_ascii=False, indent=2), encoding="utf-8"
+            json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         (output_dir / f"{result.code}.errors.json").write_text(
-            json.dumps(result.errors, ensure_ascii=False, indent=2), encoding="utf-8"
+            json.dumps(errors, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         summaries.append(result.summary())
     report = {

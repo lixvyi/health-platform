@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-09T13:42:13.063536+08:00",
+  "generatedAt": "2026-07-09T14:03:58.662814+08:00",
   "mode": "normalized-export-no-database-write",
   "datasets": [
     {
       "datasetCode": "HOSPITAL_DIRECTORY_2024",
       "datasetName": "全国医院数据库",
-      "sourceFile": "data\\external-import\\hospitals\\2024年最新全国医院数据库-省市县医院名单数据（50599家）.xlsx",
-      "sourceSha256": "c98d9739b054397d24e3598c6b50635f5527792ad52921d6656feaea321f2c26",
+      "sourceFile": "data\\processed\\health-resources\\HOSPITAL_DIRECTORY_2024.json",
+      "sourceSha256": "dd13be3f2afe7967e76513efa9a263b6e6a3fea43ae61facd30e37b1e6c1929a",
       "recordCount": 50599,
       "duplicateCount": 2001,
       "errorCount": 193,
@@ -17,8 +17,8 @@
     {
       "datasetCode": "PUBLIC_TERTIARY_HOSPITALS",
       "datasetName": "全国三级公立综合医院等级名单",
-      "sourceFile": "data\\external-import\\insurance\\全国三级公立综合医院等级名单.xlsx",
-      "sourceSha256": "3124180b3782e0ec4686c380c7833bebff4b8bb613e6a9bb4ff72c34280072be",
+      "sourceFile": "data\\processed\\health-resources\\PUBLIC_TERTIARY_HOSPITALS.json",
+      "sourceSha256": "91441b1489425a845a4f5ad8c59cc248953398e2e5fc3f553f92645649c8faaf",
       "recordCount": 129,
       "duplicateCount": 0,
       "errorCount": 0,
@@ -27,8 +27,8 @@
     {
       "datasetCode": "FUDAN_HOSPITAL_GRADES",
       "datasetName": "复旦医院等级分档",
-      "sourceFile": "data\\external-import\\rankings\\复旦医院排名.xlsx",
-      "sourceSha256": "b7b3442c418966929a621f618d6accee7a5c1400c8fc9130db13ba4f89c42043",
+      "sourceFile": "data\\processed\\health-resources\\FUDAN_HOSPITAL_GRADES.json",
+      "sourceSha256": "376f542b31c11956f6d076661cdee82e9a7f4c1b9584c6caa895f3600ee2a44f",
       "recordCount": 100,
       "duplicateCount": 0,
       "errorCount": 0,
@@ -39,20 +39,21 @@
     {
       "datasetCode": "NATIONAL_DRUG_CATALOG_2025",
       "datasetName": "2025年国家医保药品目录",
-      "sourceFile": "data\\external-import\\other\\1.国家基本医疗保险、生育保险和工伤保险药品目录以及商业健康保险创新药品目录（2025年）.xlsx",
-      "sourceSha256": "fd105a076f2c4dfc28b77863766c503ec2d479f10ba4ec7561b73a30b1f53db8",
-      "recordCount": 3441,
-      "duplicateCount": 144,
-      "errorCount": 0,
+      "sourceFile": "data\\processed\\health-resources\\NATIONAL_DRUG_CATALOG_2025.json",
+      "sourceSha256": "85800f8e261b6724d99231dba85ce0d2c83597ef71056055a079969e823f68b9",
+      "recordCount": 22212,
+      "duplicateCount": 3721,
+      "errorCount": 3,
       "warnings": [
-        "1651 条记录没有独立剂型；保持空值，不从药名推断。"
+        "1651 条记录没有独立剂型；保持空值，不从药名推断。",
+        "追加 18771 条来自 data/policies 的医保药品目录数据信息；保留 CSV 来源行号。"
       ]
     },
     {
       "datasetCode": "VACCINE_SCHEDULE_2021",
       "datasetName": "国家免疫规划儿童免疫程序",
-      "sourceFile": "data\\external-import\\other\\国家免疫规划疫苗儿童免疫程序及说明（2021年版）.xlsx",
-      "sourceSha256": "64d3624ce14d59a399dfbec174b09d1fd48e841302e9a46f13f817419c964c74",
+      "sourceFile": "data\\processed\\health-resources\\VACCINE_SCHEDULE_2021.json",
+      "sourceSha256": "0444fa653c21a1b36dbc2ec1c5165ff79f4d9c60fbeffe78f122f924fef42915",
       "recordCount": 13,
       "duplicateCount": 0,
       "errorCount": 0,
@@ -61,8 +62,8 @@
     {
       "datasetCode": "VACCINE_HIV_GUIDANCE_2021",
       "datasetName": "HIV感染母亲所生儿童接种建议",
-      "sourceFile": "data\\external-import\\other\\国家免疫规划疫苗儿童免疫程序及说明（2021年版）(1).xlsx",
-      "sourceSha256": "0a142c338f4490664da0fd97cccbbfde11ce523ae4fb88de5b6f0de3c87daf6e",
+      "sourceFile": "data\\processed\\health-resources\\VACCINE_HIV_GUIDANCE_2021.json",
+      "sourceSha256": "656107b9c71e283b4513b3675e2308cbe0d2a8ad0b7b90e30d89339a3f8191ae",
       "recordCount": 16,
       "duplicateCount": 0,
       "errorCount": 0,
