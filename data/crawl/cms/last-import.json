@@ -1,5 +1,5 @@
 {
-  "finishedAt": "2026-07-06T15:32:37.874756+00:00",
+  "finishedAt": "2026-07-09T05:29:30.044299+00:00",
   "sources": [
     {
       "sourceId": "seed_health_knowledge",
@@ -14,20 +14,16 @@
       "recordCount": 8
     },
     {
-      "sourceId": "gov_cn_zhengce",
-      "recordCount": 8
+      "sourceId": "china_cdc_public_health_news",
+      "recordCount": 12
     },
     {
       "sourceId": "internet_data_news",
-      "recordCount": 33
-    },
-    {
-      "sourceId": "nhc_gov_zcjd",
       "recordCount": 0
     }
   ],
   "cmsImport": {
     "inserted": 0,
-    "updated": 69
+    "updated": 40
   }
 }

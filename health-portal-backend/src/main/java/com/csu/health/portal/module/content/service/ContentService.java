@@ -271,12 +271,11 @@ public class ContentService {
     }
 
     /**
-     * 新闻中心聚合：当日/近期 NEWS + 3日内新政策速递 + 资源池相关资讯
+     * 新闻中心只聚合 NEWS，卫生政策保持在 POLICY 栏目，避免两个栏目内容重复。
      */
     public List<CmsContent> buildHomeNewsFeed() {
         List<CmsContent> merged = new ArrayList<>();
-        merged.addAll(contentMapper.selectRecentPublished("NEWS", 7, 15));
-        merged.addAll(contentMapper.selectRecentPublished("POLICY", 3, 8));
+        merged.addAll(contentMapper.selectRecentPublished("NEWS", 30, 15));
 
         LinkedHashMap<String, CmsContent> deduped = new LinkedHashMap<>();
         for (CmsContent c : merged) {

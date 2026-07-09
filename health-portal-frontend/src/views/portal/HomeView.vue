@@ -33,28 +33,15 @@
       </div>
     </section>
 
-    <el-row :gutter="16">
-      <el-col :span="12">
-        <div class="card">
-          <div class="card-title">新闻中心 <router-link to="/news">更多</router-link></div>
-          <ul>
-            <li v-for="n in news" :key="n.id" @click="$router.push(`/content/${n.id}`)">
-              <span v-if="n.categoryCode === 'POLICY'" class="tag policy">政策</span>
-              <span v-else-if="(n.title || '').includes('资源池')" class="tag pool">资源池</span>
-              {{ n.title }}
-            </li>
-          </ul>
-        </div>
-      </el-col>
-      <el-col :span="12">
-        <div class="card">
-          <div class="card-title">通知公告 <router-link to="/notice">更多</router-link></div>
-          <ul>
-            <li v-for="n in notices" :key="n.id" @click="$router.push(`/content/${n.id}`)">{{ n.title }}</li>
-          </ul>
-        </div>
-      </el-col>
-    </el-row>
+    <section class="card home-news">
+      <div class="card-title">新闻中心 <router-link to="/news">更多</router-link></div>
+      <ul>
+        <li v-for="n in news" :key="n.id" @click="$router.push(`/content/${n.id}`)">
+          <span v-if="(n.title || '').includes('资源池')" class="tag pool">资源池</span>
+          {{ n.title }}
+        </li>
+      </ul>
+    </section>
 
     <div class="card">
       <div class="card-title">应用中心</div>
@@ -85,7 +72,6 @@ const router = useRouter()
 const intro = ref('')
 const banners = ref([])
 const news = ref([])
-const notices = ref([])
 const apps = ref([])
 const featured = ref([])
 const dataTotal = ref(0)
@@ -103,7 +89,6 @@ onMounted(async () => {
   intro.value = res.data.intro
   banners.value = res.data.banners || []
   news.value = res.data.news || []
-  notices.value = res.data.notices || []
   apps.value = res.data.apps || []
   featured.value = featRes.data || []
   const platforms = catRes.data?.platforms || []

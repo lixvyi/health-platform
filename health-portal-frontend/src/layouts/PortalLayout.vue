@@ -2,11 +2,13 @@
   <div class="portal">
     <header class="header">
       <div class="container header-inner">
+        <button class="notice-button" type="button" title="通知公告" aria-label="通知公告" @click="$router.push('/notice')">
+          <el-icon><Bell /></el-icon>
+        </button>
         <div class="logo" @click="$router.push('/')">健康大数据创新研发中心</div>
         <nav>
           <router-link to="/">首页</router-link>
           <router-link to="/news">新闻中心</router-link>
-          <router-link to="/notice">通知公告</router-link>
           <router-link to="/policy">卫生政策</router-link>
           <router-link to="/knowledge">健康百科</router-link>
           <router-link to="/medical">医疗资源</router-link>
@@ -45,10 +47,16 @@
   </div>
 </template>
 
+<script setup>
+import { Bell } from '@element-plus/icons-vue'
+</script>
+
 <style scoped>
 .portal { min-height: 100vh; display: flex; flex-direction: column; background: #f5f7fa; }
 .header { background: #1a6fb5; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; flex-wrap: wrap; gap: 8px; }
+.notice-button { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, transform .2s; }
+.notice-button:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
 .logo { font-size: 18px; font-weight: 700; cursor: pointer; }
 nav a { color: #fff; margin: 0 8px; text-decoration: none; opacity: .9; font-size: 14px; }
 nav a.router-link-active { opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; }

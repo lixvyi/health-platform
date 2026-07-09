@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T15:57:53.969505+08:00",
+  "generatedAt": "2026-07-09T13:42:13.063536+08:00",
   "mode": "normalized-export-no-database-write",
   "datasets": [
     {
@@ -148,6 +148,14 @@
       "trustedForAutomaticImport": false
     },
     {
+      "file": "data\\crawl\\cms\\china_cdc_public_health_news.json",
+      "sourceName": "中国疾控中心-公共卫生数据通报",
+      "recordCount": 12,
+      "actualItems": 12,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
       "file": "data\\crawl\\cms\\gov_cn_zhengce.json",
       "sourceName": "中国政府网-最新政策",
       "recordCount": 8,
@@ -158,10 +166,10 @@
     {
       "file": "data\\crawl\\cms\\internet_data_news.json",
       "sourceName": "互联网采集-数据与卫生资讯",
-      "recordCount": 33,
-      "actualItems": 33,
+      "recordCount": 0,
+      "actualItems": 0,
       "seedUrlCount": 0,
-      "trustedForAutomaticImport": true
+      "trustedForAutomaticImport": false
     },
     {
       "file": "data\\crawl\\cms\\internet_health_mirror.json",

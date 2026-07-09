@@ -112,7 +112,7 @@ public class AiKnowledgeContextService {
     }
 
     private List<ScoredRef> searchCms(String categoryCode, String type, List<String> terms, double weight) {
-        List<CmsContent> rows = contentMapper.selectPageByCondition(categoryCode, null, 1, 0, 80);
+        List<CmsContent> rows = contentMapper.selectPageByCondition(categoryCode, null, null, 1, 0, 80);
         List<ScoredRef> result = new ArrayList<>();
         for (CmsContent row : rows) {
             String plain = stripHtml(nullSafe(row.getSummary()) + " " + nullSafe(row.getContent()));

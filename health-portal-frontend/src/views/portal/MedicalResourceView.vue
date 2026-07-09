@@ -81,7 +81,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="药品目录" name="drugs">
-        <div class="section-head"><div><h3>2025年国家医保药品目录</h3><p>分类代码、分类、编号、药品名称和剂型均来自原始 Excel；原表无剂型时保持为空。</p></div></div>
+        <div class="section-head"><div><h3>2025年国家医保药品目录</h3><p>分类代码、分类、编号、药品名称和剂型均来自本地导入的原始 Excel；原表无剂型时保持为空，表格保留来源文件、工作表和行号。</p></div></div>
         <div class="filters">
           <el-input v-model="drugFilter.categoryCode" placeholder="分类代码" clearable @keyup.enter="searchDrugs" />
           <el-input v-model="drugFilter.categoryName" placeholder="药品分类" clearable @keyup.enter="searchDrugs" />
@@ -98,6 +98,11 @@
           <el-table-column prop="drugNumber" label="编号" width="110" />
           <el-table-column prop="drugName" label="药品名称" min-width="230" />
           <el-table-column prop="dosageForm" label="剂型" min-width="150"><template #default="scope">{{ scope.row.dosageForm || '原表未单列' }}</template></el-table-column>
+          <el-table-column label="来源" min-width="260">
+            <template #default="scope">
+              <span>{{ sourceLabel(scope.row) }}</span>
+            </template>
+          </el-table-column>
         </el-table>
         <el-pagination v-if="drugTotal > pageSize" v-model:current-page="drugPage" :page-size="pageSize" :total="drugTotal" layout="prev, pager, next" @current-change="loadDrugs" />
       </el-tab-pane>
@@ -160,6 +165,12 @@ const loadDrugs = async () => {
 }
 const searchDrugs = () => { drugPage.value = 1; loadDrugs() }
 const resetDrugs = () => { drugFilter.value = { categoryCode: '', categoryName: '', drugNumber: '', drugName: '', dosageForm: '' }; searchDrugs() }
+const sourceLabel = (row) => {
+  const file = (row.sourceFile || '').split(/[\\/]/).pop() || '本地导入文件'
+  const sheet = row.sourceSheet ? ` / ${row.sourceSheet}` : ''
+  const line = row.sourceRow ? ` / 第${row.sourceRow}行` : ''
+  return `${file}${sheet}${line}`
+}
 
 watch(activeTab, (tab) => {
   if (tab === 'tertiary' && !tertiaryHospitals.value.length) loadTertiary()

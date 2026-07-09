@@ -27,6 +27,15 @@ ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL_ROOT = ROOT / "data" / "external-import"
 DEFAULT_OUTPUT = ROOT / "data" / "processed" / "health-resources"
 
+DATASET_META = {
+    "hospitals": ("HOSPITAL_DIRECTORY_2024", "全国医院数据库"),
+    "tertiary": ("PUBLIC_TERTIARY_HOSPITALS", "全国三级公立综合医院等级名单"),
+    "grades": ("FUDAN_HOSPITAL_GRADES", "复旦医院等级分档"),
+    "drugs": ("NATIONAL_DRUG_CATALOG_2025", "2025年国家医保药品目录"),
+    "vaccine-schedule": ("VACCINE_SCHEDULE_2021", "国家免疫规划儿童免疫程序"),
+    "vaccine-hiv": ("VACCINE_HIV_GUIDANCE_2021", "HIV感染母亲所生儿童接种建议"),
+}
+
 
 @dataclass
 class DatasetResult:
@@ -81,6 +90,45 @@ def single_file(folder: str, pattern: str) -> Path:
 
 def workbook(path: Path):
     return openpyxl.load_workbook(path, read_only=True, data_only=True)
+
+
+def audit_dataset_summary(code: str) -> dict[str, Any]:
+    report = DEFAULT_OUTPUT / "audit-report.json"
+    if not report.exists():
+        return {}
+    try:
+        payload = json.loads(report.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    for row in payload.get("datasets", []):
+        if row.get("datasetCode") == code:
+            return row
+    return {}
+
+
+def load_processed_dataset(key: str) -> DatasetResult | None:
+    code, name = DATASET_META[key]
+    path = DEFAULT_OUTPUT / f"{code}.json"
+    if not path.exists():
+        return None
+    records = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(records, list):
+        raise RuntimeError(f"{path.relative_to(ROOT)} 不是记录数组")
+
+    error_path = DEFAULT_OUTPUT / f"{code}.errors.json"
+    errors = []
+    if error_path.exists():
+        errors = json.loads(error_path.read_text(encoding="utf-8"))
+        if not isinstance(errors, list):
+            errors = []
+
+    summary = audit_dataset_summary(code)
+    result = DatasetResult(code, name, path)
+    result.records = records
+    result.errors = errors
+    result.warnings = list(summary.get("warnings") or [])
+    result.duplicate_count = int(summary.get("duplicateCount") or 0)
+    return result
 
 
 def parse_hospitals() -> DatasetResult:
@@ -336,7 +384,7 @@ def parse_vaccine_hiv_guidance() -> DatasetResult:
     return result
 
 
-PARSERS: dict[str, Callable[[], DatasetResult]] = {
+EXCEL_PARSERS: dict[str, Callable[[], DatasetResult]] = {
     "hospitals": parse_hospitals,
     "tertiary": parse_tertiary_hospitals,
     "grades": parse_hospital_grades,
@@ -344,6 +392,14 @@ PARSERS: dict[str, Callable[[], DatasetResult]] = {
     "vaccine-schedule": parse_vaccine_schedule,
     "vaccine-hiv": parse_vaccine_hiv_guidance,
 }
+
+
+def load_dataset(key: str, from_excel: bool = False) -> DatasetResult:
+    if not from_excel:
+        result = load_processed_dataset(key)
+        if result is not None:
+            return result
+    return EXCEL_PARSERS[key]()
 
 
 def audit_crawl_json() -> list[dict[str, Any]]:
@@ -568,9 +624,10 @@ def apply_results(results: list[DatasetResult]) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--dataset", action="append", choices=sorted(PARSERS),
+        "--dataset", action="append", choices=sorted(EXCEL_PARSERS),
         help="只处理指定数据集；可重复使用。默认处理全部。",
     )
+    parser.add_argument("--from-excel", action="store_true", help="从 data/external-import 的 Excel 重新解析；默认直接读取标准化 JSON")
     parser.add_argument("--export", action="store_true", help="输出标准化 JSON 和错误报告")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="标准化输出目录")
     parser.add_argument("--apply", action="store_true", help="显式写入数据库；默认绝不写库")
@@ -579,10 +636,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    selected = args.dataset or list(PARSERS)
+    selected = args.dataset or list(EXCEL_PARSERS)
     results = []
     for key in selected:
-        result = PARSERS[key]()
+        result = load_dataset(key, args.from_excel)
         results.append(result)
         print(json.dumps(result.summary(), ensure_ascii=False))
 

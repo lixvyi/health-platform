@@ -36,7 +36,8 @@ HEALTH_KW = [
     "疫苗", "接种", "养老", "妇幼", "基层", "中医", "药品", "传染病", "慢病",
     "营养", "心理", "康复", "体检", "生育",
 ]
-POLICY_KW = ["规划", "纲要", "条例", "意见", "通知", "方案", "规定", "办法", "政策", "解读"]
+POLICY_KW = ["规划", "纲要", "条例", "意见", "通知", "方案", "规定", "办法", "政策", "解读",
+             "目录", "标准", "规范", "公告", "批复", "分类", "制度"]
 KNOWLEDGE_KW = ["科普", "建议", "饮食", "预防", "指南", "宣传", "保健", "用药"]
 LIFESTYLE_KW = [
     "健康", "睡眠", "运动", "饮食", "营养", "作息", "锻炼", "养生", "保健", "防病",
@@ -137,9 +138,10 @@ def crawl_policy_list(source: dict, headers: dict, delay: float, max_items: int)
     fetch_detail_flag = source.get("fetchDetail", True)
     max_detail = int(source.get("maxDetailFetch", 12))
     default_category = source.get("categoryCode", "POLICY")
+    exclude_policy = source.get("excludePolicyKeyword", False)
 
     for a in soup.select("a[href]"):
-        title = a.get_text(strip=True)
+        title = a.get_text(" ", strip=True)
         href = a.get("href", "")
         if not title or len(title) < 6 or len(title) > 150:
             continue
@@ -153,6 +155,8 @@ def crawl_policy_list(source: dict, headers: dict, delay: float, max_items: int)
         if keywords and not match_keywords(title, keywords):
             continue
         if require_health and not match_keywords(title, HEALTH_KW):
+            continue
+        if exclude_policy and match_keywords(title, POLICY_KW):
             continue
         if not link_pattern and keywords and not match_keywords(title, keywords):
             continue
@@ -222,7 +226,10 @@ def load_seed_knowledge(source: dict) -> dict:
 
 def crawl_article_list(source: dict, headers: dict, delay: float, max_items: int) -> dict:
     cfg = dict(source)
-    if not cfg.get("keywords"):
+    if cfg.get("allowAnyTitle"):
+        cfg["keywords"] = []
+        cfg["requireHealthKeyword"] = False
+    elif not cfg.get("keywords"):
         cfg["keywords"] = LIFESTYLE_KW
     cfg["requireHealthKeyword"] = cfg.get("requireHealthKeyword", True)
     return crawl_policy_list(cfg, headers, delay, max_items)
@@ -242,6 +249,7 @@ def mirror_internet_crawl(source: dict) -> dict:
     keywords = source.get("keywords", HEALTH_KW)
     require_health = source.get("requireHealthKeyword", True)
     exclude_policy = source.get("excludePolicyKeyword", False)
+    exclude_url_patterns = source.get("excludeUrlPatterns", [])
     default_category = source.get("categoryCode", "NEWS")
     items = []
     seen = set()
@@ -256,6 +264,8 @@ def mirror_internet_crawl(source: dict) -> dict:
             if not title or not url or len(title) < 6:
                 continue
             if url in seen:
+                continue
+            if any(pattern in url for pattern in exclude_url_patterns):
                 continue
             if require_health and not match_keywords(title, keywords):
                 continue
@@ -310,6 +320,16 @@ def build_content(title: str, url: str, summary: str, attribution: str) -> str:
     )
 
 
+def parse_source_date(title: str) -> str | None:
+    match = re.search(r"(20\d{2})-(\d{1,2})-(\d{1,2})", title)
+    if not match:
+        match = re.search(r"(20\d{2})年(\d{1,2})月(\d{1,2})日", title)
+    if not match:
+        return None
+    year, month, day = (int(part) for part in match.groups())
+    return f"{year:04d}-{month:02d}-{day:02d}"
+
+
 def import_to_cms(all_results: list[dict], db_cfg: dict) -> dict:
     conn = pymysql.connect(
         host=db_cfg["host"], user=db_cfg["user"], password=db_cfg["password"],
@@ -338,20 +358,27 @@ def import_to_cms(all_results: list[dict], db_cfg: dict) -> dict:
                 )
             else:
                 content = build_content(title, url, summary, item.get("attribution") or attribution)
-            author = "合规采集·" + (item.get("sourceName") or attribution)
+            source_name = item.get("sourceName") or attribution
+            source_date = parse_source_date(title)
+            author = "合规采集·" + source_name
 
             if row:
                 cur.execute(
-                    "UPDATE cms_content SET title=%s, summary=%s, content=%s, updated_at=NOW() WHERE id=%s",
-                    (title, summary[:200], content, row[0]),
+                    "UPDATE cms_content SET title=%s, summary=%s, content=%s, source_name=%s, "
+                    "source_publish_date=%s, publish_time=COALESCE(%s, publish_time), updated_at=NOW() WHERE id=%s",
+                    (title, summary[:200], content, source_name, source_date, source_date, row[0]),
                 )
                 updated += 1
             else:
                 cur.execute(
                     "INSERT INTO cms_content "
-                    "(category_code, title, summary, content, source_url, author, view_count, status, publish_time) "
-                    "VALUES (%s,%s,%s,%s,%s,%s,0,1,NOW())",
-                    (item.get("categoryCode", category), title, summary[:200], content, url, author),
+                    "(category_code, title, summary, content, source_url, source_name, source_publish_date, "
+                    "author, view_count, status, publish_time) "
+                    "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,0,1,COALESCE(%s,NOW()))",
+                    (
+                        item.get("categoryCode", category), title, summary[:200], content, url,
+                        source_name, source_date, author, source_date,
+                    ),
                 )
                 inserted += 1
 

@@ -25,14 +25,16 @@ CRAWL_DIRS = [
 JDBC = ROOT / "health-portal-backend" / "src" / "main" / "resources" / "jdbc.properties"
 
 NEWS_KW = [
-    "健康", "卫生", "医疗", "数据", "统计", "GDP", "CPI", "PMI", "发布", "就业", "收入",
-    "医保", "养老", "疾控", "公卫", "医院", "疫苗",
+    "健康", "卫生", "医疗", "医药", "医保", "疾控", "公卫", "公共卫生", "医院", "疫苗",
+    "接种", "传染病", "慢病", "养老", "妇幼", "基层卫生", "中医药", "用药", "急救",
 ]
 
 POLICY_HINT_KW = [
     "规划", "纲要", "条例", "意见", "通知", "方案", "规定", "办法", "政策", "解读",
     "目录", "标准", "规范", "公告", "批复", "分类", "制度",
 ]
+NEWS_PATTERN = "|".join(NEWS_KW)
+POLICY_PATTERN = "|".join(POLICY_HINT_KW)
 
 
 def load_db_config() -> dict:
@@ -111,6 +113,54 @@ def upsert_news(cur, source_url: str, title: str, summary: str, content: str, au
     return "inserted"
 
 
+def cleanup_old_auto_news(cur) -> int:
+    cur.execute(
+        """
+        DELETE FROM cms_content
+        WHERE category_code='NEWS'
+          AND (source_url LIKE 'news:policy:%' OR title LIKE '[政策速递] %')
+        """
+    )
+    deleted = cur.rowcount
+    cur.execute(
+        """
+        DELETE n FROM cms_content n
+        JOIN cms_content p
+          ON p.category_code='POLICY'
+         AND p.source_url IS NOT NULL
+         AND p.source_url = n.source_url
+        WHERE n.category_code='NEWS'
+        """
+    )
+    deleted += cur.rowcount
+    cur.execute(
+        """
+        DELETE FROM cms_content
+        WHERE category_code='NEWS'
+          AND source_url LIKE 'https://www.stats.gov.cn/%%'
+        """
+    )
+    deleted += cur.rowcount
+    cur.execute(
+        """
+        DELETE FROM cms_content
+        WHERE category_code='NEWS'
+          AND (author='互联网采集' OR author LIKE '合规采集·互联网采集%%')
+          AND (
+            title REGEXP %s
+            OR title NOT REGEXP %s
+            OR source_url LIKE '%%/zhengce/content/%%'
+            OR source_url LIKE '%%/zhengce/jiedu/%%'
+            OR source_url LIKE '%%/xw/tjxw/tzgg/%%'
+            OR source_url LIKE '%%/sj/zbjs/%%'
+          )
+        """,
+        (POLICY_PATTERN, NEWS_PATTERN),
+    )
+    deleted += cur.rowcount
+    return deleted
+
+
 def sync_pool_daily(cur) -> int:
     last_run = load_last_run()
     if not last_run:
@@ -169,12 +219,13 @@ def main() -> int:
         database=db["database"], charset="utf8mb4",
     )
     cur = conn.cursor()
+    cleanup_n = cleanup_old_auto_news(cur)
     pool_n = sync_pool_daily(cur)
     internet_n = sync_internet_as_news(cur)
     conn.commit()
     cur.close()
     conn.close()
-    print(f"NEWS-SYNC pool={pool_n} policy=disabled internet={internet_n}")
+    print(f"NEWS-SYNC cleanup={cleanup_n} pool={pool_n} policy=disabled internet={internet_n}")
     return 0
 
 
