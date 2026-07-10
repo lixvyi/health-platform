@@ -25,7 +25,11 @@ export const portalApi = {
   dataPoolInternet: () => http.get('/portal/data-pool/internet'),
   dataPoolCollectStatus: () => http.get('/portal/data-pool/collect/status'),
   dataPoolBigDataStatus: () => http.get('/portal/data-pool/bigdata/status'),
-  aiChat: (data) => http.post('/ai/chat', data)
+  aiChat: (data) => http.post('/ai/chat', data),
+  // 热词关联政策搜索
+  policiesByWord: (word) => http.get('/portal/policies-by-word', {params: {word}}),
+  // 热词共现网络
+  cooccurrence: (year) => http.get('/portal/cooccurrence', {params: {year}})
 }
 
 // 症状自查API

@@ -35,7 +35,13 @@
     </template>
 
     <template v-else>
-      <el-table :data="list" stripe @row-click="open" style="margin-top:16px;cursor:pointer">
+      <div style="margin-bottom:12px;display:flex;justify-content:flex-end;">
+        <el-button type="primary" plain size="small" @click="goHotwordTrend">
+          <el-icon style="margin-right:4px"><TrendCharts /></el-icon>
+          热词演变趋势
+        </el-button>
+      </div>
+      <el-table :data="list" stripe @row-click="open" style="margin-top:4px;cursor:pointer">
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="author" label="作者" width="120" />
         <el-table-column prop="publishTime" label="发布时间" width="180" />
@@ -49,6 +55,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { TrendCharts } from '@element-plus/icons-vue'
 import { portalApi } from '../../api'
 
 const props = defineProps({ category: String, title: String })
@@ -70,6 +77,7 @@ const load = async () => {
 }
 const search = () => { page.value = 1; load() }
 const open = (row) => router.push(`/content/${row.id}`)
+const goHotwordTrend = () => router.push('/policy-hotword-trend')
 const sourceOf = (item) => item.sourceName || item.author || '公开来源'
 const formatDate = (value) => value ? String(value).slice(0, 10) : '待发布'
 const imageStyle = (item) => ({

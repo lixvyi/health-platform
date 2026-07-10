@@ -14,19 +14,22 @@ public class KnowledgeCategory {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @TableField("category_name")
+    @TableField("name")
     private String name;
 
-    @TableField("category_code")
+    @TableField("code")
     private String code;
 
     @TableField(exist = false)
     private String icon;
 
-    @TableField("display_order")
+    @TableField("sort_order")
     private Integer sortOrder;
 
+    @TableField(exist = false)
     private String description;
+
+    @TableField(exist = false)
     private String externalUrl;
     private Integer status;
     private LocalDateTime createdAt;

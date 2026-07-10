@@ -4,27 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.csu.health.portal.common.BusinessException;
 import com.csu.health.portal.module.content.dto.ContentSaveRequest;
-import com.csu.health.portal.module.content.entity.CmsApp;
-import com.csu.health.portal.module.content.entity.CmsBanner;
-import com.csu.health.portal.module.content.entity.CmsContent;
-import com.csu.health.portal.module.content.entity.CmsSiteConfig;
-import com.csu.health.portal.module.content.entity.KnowledgeCategory;
-import com.csu.health.portal.module.content.mapper.CmsAppMapper;
-import com.csu.health.portal.module.content.mapper.CmsBannerMapper;
-import com.csu.health.portal.module.content.mapper.CmsContentMapper;
-import com.csu.health.portal.module.content.mapper.CmsSiteConfigMapper;
-import com.csu.health.portal.module.content.mapper.KnowledgeCategoryMapper;
+import com.csu.health.portal.module.content.entity.*;
+import com.csu.health.portal.module.content.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -88,8 +75,8 @@ public class ContentService {
         if ("DRUG".equals(code)) return "💊";
         if ("VACCINE".equals(code)) return "💉";
         if ("EPIDEMIC".equals(code)) return "🦠";
-        if ("HEALTH_POPULARIZATION".equals(code)) return "❤️";
-        if ("MEDICAL_TERMS".equals(code)) return "📋";
+        if ("HEALTH_SCIENCE".equals(code)) return "❤️";
+        if ("MEDICAL_TERM".equals(code)) return "📋";
         return "📚";
     }
 
