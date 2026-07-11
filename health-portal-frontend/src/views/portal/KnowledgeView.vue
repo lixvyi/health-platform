@@ -57,8 +57,8 @@
         @click="openDetail(item.id)"
         @keyup.enter="openDetail(item.id)"
       >
-        <div class="knowledge-cover" v-if="item.coverUrl">
-          <img :src="item.coverUrl" :alt="item.title" />
+        <div class="knowledge-cover">
+          <img :src="articleImageOf(item)" :alt="item.title" />
         </div>
         <div class="knowledge-info">
           <h3>{{ item.title }}</h3>
@@ -89,6 +89,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { portalApi } from '../../api'
+import { articleImageOf } from '../../utils/articleImages'
 
 const router = useRouter()
 const categories = ref([])

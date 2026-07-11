@@ -50,6 +50,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { portalApi } from '../../api'
+import { articleImageOf } from '../../utils/articleImages'
 
 const props = defineProps({ category: String, title: String })
 const router = useRouter()
@@ -57,7 +58,6 @@ const keyword = ref('')
 const list = ref([])
 const page = ref(1)
 const total = ref(0)
-const fallbackImage = new URL('../../assets/hero.png', import.meta.url).href
 const isNews = computed(() => props.category === 'NEWS')
 const pageSize = computed(() => isNews.value ? 12 : 10)
 const firstNews = computed(() => isNews.value ? list.value[0] : null)
@@ -73,7 +73,7 @@ const open = (row) => router.push(`/content/${row.id}`)
 const sourceOf = (item) => item.sourceName || item.author || '公开来源'
 const formatDate = (value) => value ? String(value).slice(0, 10) : '待发布'
 const imageStyle = (item) => ({
-  backgroundImage: `linear-gradient(180deg, rgba(12, 34, 48, .08), rgba(12, 34, 48, .22)), url(${item.coverUrl || fallbackImage})`
+  backgroundImage: `linear-gradient(180deg, rgba(12, 34, 48, .08), rgba(12, 34, 48, .22)), url(${articleImageOf(item)})`
 })
 
 onMounted(load)
@@ -89,6 +89,7 @@ h2 { margin: 0 0 8px; }
 .search-box { display: flex; gap: 8px; min-width: 340px; }
 .news-featured { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); min-height: 360px; background: #fff; border-radius: 8px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 26px rgba(16, 39, 64, .08); }
 .featured-image, .card-image { background-size: cover; background-position: center; }
+.featured-image { min-height: 300px; }
 .featured-copy { padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; }
 .meta { color: #789; font-size: 12px; margin-bottom: 10px; }
 .featured-copy h3, .news-card h3 { margin: 0; color: #152b3c; line-height: 1.45; }
@@ -108,6 +109,7 @@ h2 { margin: 0 0 8px; }
   .search-box { min-width: 0; width: 100%; }
   .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .news-card.wide { grid-column: span 1; display: block; }
+  .featured-image { min-height: 0; aspect-ratio: 16 / 9; }
 }
 @media (max-width: 640px) {
   .page { margin: 12px auto; padding: 14px; }

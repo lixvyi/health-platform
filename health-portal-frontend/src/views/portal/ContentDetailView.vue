@@ -10,11 +10,12 @@
     <template v-else-if="item">
       <el-breadcrumb separator="/" class="breadcrumb">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/knowledge' }">健康百科</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: currentCategory.path }">{{ currentCategory.label }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ item.title }}</el-breadcrumb-item>
       </el-breadcrumb>
 
       <article>
+        <img class="article-cover" :src="articleImageOf(item)" :alt="item.title" />
         <h1>{{ item.title }}</h1>
         <div class="meta">
           <span v-if="item.publisher || item.author">{{ item.publisher || item.author }}</span>
@@ -70,15 +71,16 @@
         </div>
       </section>
 
-      <div class="actions"><el-button type="primary" plain @click="router.push('/knowledge')">返回健康百科</el-button></div>
+      <div class="actions"><el-button type="primary" plain @click="backToList">返回{{ currentCategory.label }}</el-button></div>
     </template>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { portalApi } from '../../api'
+import { articleImageOf } from '../../utils/articleImages'
 
 const route = useRoute()
 const router = useRouter()
@@ -86,6 +88,12 @@ const item = ref(null)
 const related = ref([])
 const loading = ref(true)
 const error = ref('')
+const categoryMap = {
+  NEWS: { label: '新闻中心', path: '/news' },
+  POLICY: { label: '卫生政策', path: '/policy' },
+  KNOWLEDGE: { label: '健康百科', path: '/knowledge' }
+}
+const currentCategory = computed(() => categoryMap[item.value?.categoryCode] || categoryMap.KNOWLEDGE)
 
 const formatDate = (value) => value ? String(value).slice(0, 10) : ''
 const statusText = (value) => ({ VERIFIED: '已核验', OUTDATED: '已过期', UNVERIFIED: '未核验' }[value] || value)
@@ -110,6 +118,7 @@ const load = async () => {
 }
 
 const openRelated = (id) => router.push(`/content/${id}`)
+const backToList = () => router.push(currentCategory.value.path)
 
 watch(() => route.params.id, load)
 onMounted(load)
@@ -118,6 +127,7 @@ onMounted(load)
 <style scoped>
 .page { padding: 28px 32px; background: #fff; margin: 20px auto; border-radius: 8px; max-width: 900px; }
 .breadcrumb { margin-bottom: 20px; }
+.article-cover { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 8px; margin-bottom: 22px; display: block; }
 h1 { margin: 0 0 12px; color: #303133; line-height: 1.4; }
 .meta { display: flex; flex-wrap: wrap; gap: 16px; color: #909399; font-size: 13px; margin-bottom: 20px; }
 .notice { margin-bottom: 14px; }
