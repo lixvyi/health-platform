@@ -15,7 +15,20 @@
       </el-breadcrumb>
 
       <article>
-        <img class="article-cover" :src="articleImageOf(item)" :alt="item.title" />
+        <figure class="cover-block">
+          <img class="article-cover" :src="articleImageOf(item)" :alt="item.title" />
+          <figcaption v-if="coverCredit" class="cover-credit">
+            图片来源：
+            <a :href="coverCredit.sourceUrl" target="_blank" rel="noopener noreferrer">
+              {{ coverCredit.creator || coverCredit.imageTitle || coverCredit.provider }}
+            </a>
+            <span v-if="coverCredit.license"> · </span>
+            <a v-if="coverCredit.licenseUrl" :href="coverCredit.licenseUrl" target="_blank" rel="noopener noreferrer">
+              {{ coverCredit.license }}
+            </a>
+            <span v-else-if="coverCredit.license">{{ coverCredit.license }}</span>
+          </figcaption>
+        </figure>
         <h1>{{ item.title }}</h1>
         <div class="meta">
           <span v-if="item.publisher || item.author">{{ item.publisher || item.author }}</span>
@@ -86,6 +99,7 @@ const route = useRoute()
 const router = useRouter()
 const item = ref(null)
 const related = ref([])
+const coverCredit = ref(null)
 const loading = ref(true)
 const error = ref('')
 const categoryMap = {
@@ -98,11 +112,24 @@ const currentCategory = computed(() => categoryMap[item.value?.categoryCode] || 
 const formatDate = (value) => value ? String(value).slice(0, 10) : ''
 const statusText = (value) => ({ VERIFIED: '已核验', OUTDATED: '已过期', UNVERIFIED: '未核验' }[value] || value)
 
+const loadCoverCredit = async (id) => {
+  coverCredit.value = null
+  try {
+    const response = await fetch('/article-covers/attribution.json', { cache: 'no-cache' })
+    if (!response.ok) return
+    const manifest = await response.json()
+    coverCredit.value = manifest.items?.[String(id)] || null
+  } catch {
+    coverCredit.value = null
+  }
+}
+
 const load = async () => {
   loading.value = true
   error.value = ''
   item.value = null
   related.value = []
+  coverCredit.value = null
   try {
     const [detailResponse, relatedResponse] = await Promise.all([
       portalApi.contentDetail(route.params.id),
@@ -110,6 +137,7 @@ const load = async () => {
     ])
     item.value = detailResponse.data
     related.value = relatedResponse.data || []
+    await loadCoverCredit(detailResponse.data.id)
   } catch (e) {
     error.value = e?.response?.data?.message || '内容不存在、未发布或服务暂时不可用'
   } finally {
@@ -127,7 +155,10 @@ onMounted(load)
 <style scoped>
 .page { padding: 28px 32px; background: #fff; margin: 20px auto; border-radius: 8px; max-width: 900px; }
 .breadcrumb { margin-bottom: 20px; }
-.article-cover { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 8px; margin-bottom: 22px; display: block; }
+.cover-block { margin: 0 0 22px; }
+.article-cover { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 8px; display: block; }
+.cover-credit { margin-top: 7px; color: #7b8794; font-size: 12px; line-height: 1.5; text-align: right; }
+.cover-credit a { color: #52738a; }
 h1 { margin: 0 0 12px; color: #303133; line-height: 1.4; }
 .meta { display: flex; flex-wrap: wrap; gap: 16px; color: #909399; font-size: 13px; margin-bottom: 20px; }
 .notice { margin-bottom: 14px; }
