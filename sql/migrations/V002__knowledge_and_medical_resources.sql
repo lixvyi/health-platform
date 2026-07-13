@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS knowledge_category (
     sort_order   INT NOT NULL DEFAULT 0,
     status       TINYINT NOT NULL DEFAULT 1,
     created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE KEY uk_knowledge_category_code (code),
     KEY idx_knowledge_category_parent (parent_id, sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='健康百科分类';

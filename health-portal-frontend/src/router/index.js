@@ -21,6 +21,7 @@ const routes = [
       { path: 'api-services', name: 'apiServices', component: () => import('../views/portal/ApiServiceView.vue') },
       { path: 'my-applies', name: 'myApplies', component: () => import('../views/portal/MyAppliesView.vue') },
       { path: 'data-pool', name: 'dataPool', component: () => import('../views/portal/DataPoolView.vue') },
+      { path: 'data-pool/governance', name: 'dataGovernance', component: () => import('../views/portal/DataGovernanceView.vue') },
       { path: 'data-agreement', name: 'dataAgreement', component: () => import('../views/portal/DataAgreementView.vue') },
       { path: 'about', name: 'about', component: () => import('../views/portal/AboutView.vue') },
       { path: 'ai', name: 'ai', component: () => import('../views/portal/AiChatView.vue') },

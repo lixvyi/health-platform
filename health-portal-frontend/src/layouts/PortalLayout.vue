@@ -15,9 +15,7 @@
           <router-link to="/data">数据资源</router-link>
           <router-link to="/resources">资源下载</router-link>
           <router-link to="/api-services">API服务</router-link>
-          <router-link v-if="store.isLoggedIn" to="/my-applies">我的申请</router-link>
           <router-link to="/data-pool">数据资源池</router-link>
-          <router-link to="/apps">应用中心</router-link>
           <router-link to="/symptom-check">症状自查</router-link>
           <router-link to="/about">关于我们</router-link>
           <router-link to="/ai">AI问答</router-link>

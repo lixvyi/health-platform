@@ -2,6 +2,7 @@ package com.csu.health.portal.module.datapool.controller;
 
 import com.csu.health.portal.common.Result;
 import com.csu.health.portal.module.datapool.dto.DataPoolDto;
+import com.csu.health.portal.module.datapool.service.DataGovernanceService;
 import com.csu.health.portal.module.datapool.service.DataPoolService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +18,7 @@ import java.util.List;
 public class DataPoolPortalController {
 
     private final DataPoolService dataPoolService;
+    private final DataGovernanceService dataGovernanceService;
 
     @Operation(summary = "统一数据平台架构")
     @GetMapping("/architecture")
@@ -40,5 +42,11 @@ public class DataPoolPortalController {
     @GetMapping("/bigdata/status")
     public Result<DataPoolDto.BigDataStatus> bigDataStatus() {
         return Result.ok(dataPoolService.bigDataStatus());
+    }
+
+    @Operation(summary = "数据治理看板")
+    @GetMapping("/governance")
+    public Result<DataPoolDto.GovernanceDashboard> governance() {
+        return Result.ok(dataGovernanceService.dashboard());
     }
 }

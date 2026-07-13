@@ -25,6 +25,7 @@ export const portalApi = {
   dataPoolInternet: () => http.get('/portal/data-pool/internet'),
   dataPoolCollectStatus: () => http.get('/portal/data-pool/collect/status'),
   dataPoolBigDataStatus: () => http.get('/portal/data-pool/bigdata/status'),
+  dataPoolGovernance: () => http.get('/portal/data-pool/governance'),
   aiChat: (data) => http.post('/ai/chat', data),
   // 热词关联政策搜索
   policiesByWord: (word) => http.get('/portal/policies-by-word', {params: {word}}),
@@ -63,6 +64,7 @@ export const adminApi = {
   dataPoolCollect: () => http.post('/admin/data-pool/collect'),
   dataPoolCollectStatus: () => http.get('/admin/data-pool/collect/status'),
   dataPoolEtlRun: () => http.post('/admin/data-pool/etl/run'),
+  updateGovernanceIssue: (id, data) => http.patch(`/admin/data-pool/governance/issues/${id}`, data),
   upload: (file) => {
     const form = new FormData()
     form.append('file', file)

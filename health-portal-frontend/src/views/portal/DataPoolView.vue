@@ -1,5 +1,6 @@
 <template>
   <div class="container page">
+    <DataPoolNav />
     <h2>{{ arch.title || '统一数据资源池与计算平台' }}</h2>
     <p class="lead">{{ arch.description }}</p>
 
@@ -108,6 +109,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import DataSourceNotice from '../../components/DataSourceNotice.vue'
+import DataPoolNav from '../../components/DataPoolNav.vue'
 import { portalApi } from '../../api'
 
 const arch = ref({ layers: [], stats: {}, techStack: [], datasets: [] })
