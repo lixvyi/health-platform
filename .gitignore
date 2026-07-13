@@ -5,6 +5,8 @@ node_modules/
 *.class
 *.jar
 *.war
+__pycache__/
+*.py[cod]
 
 # IDE
 .idea/
@@ -18,6 +20,7 @@ logs/
 logs/daily-collect.log
 uploads/
 tmp/
+outputs/
 
 # Env
 .env
