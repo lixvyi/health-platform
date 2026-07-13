@@ -31,8 +31,12 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/ai/**").permitAll()
+                        .requestMatchers("/api/portal/user/**").authenticated()
                         .requestMatchers(
                                 "/api/auth/**",
+                                "/api/portal/auth/**",
+                                "/api/portal/catalog/**",
                                 "/api/portal/**",
                                 "/api/v1/**",
                                 "/uploads/**",
@@ -42,7 +46,7 @@ public class SecurityConfig {
                                 "/doc.html",
                                 "/webjars/**"
                         ).permitAll()
-                        .requestMatchers("/api/ai/**").permitAll()
+                        .requestMatchers("/api/admin/portal/**").hasRole("ADMIN")
                         .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "EDITOR")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

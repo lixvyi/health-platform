@@ -8,6 +8,9 @@
         <el-button type="primary" native-type="submit" :loading="loading" style="width:100%">登录</el-button>
       </el-form>
       <p class="hint">默认账号 admin / Admin@123</p>
+      <div class="back-portal">
+        <el-button type="primary" link @click="$router.push('/')">← 返回公众门户首页</el-button>
+      </div>
     </el-card>
   </div>
 </template>
@@ -42,4 +45,5 @@ const submit = async () => {
 .login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a6fb5, #0d3f66); }
 .card { width: 400px; }
 .hint { font-size: 12px; color: #888; text-align: center; margin-top: 12px; }
+.back-portal { text-align: center; margin-top: 8px; }
 </style>

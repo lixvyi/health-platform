@@ -17,6 +17,9 @@ const routes = [
       { path: 'content/:id', name: 'contentDetail', component: () => import('../views/portal/ContentDetailView.vue') },
       { path: 'apps', name: 'apps', component: () => import('../views/portal/AppsView.vue') },
       { path: 'data', name: 'data', component: () => import('../views/portal/DataResourceView.vue') },
+      { path: 'resources', name: 'resources', component: () => import('../views/portal/ResourceApplyView.vue') },
+      { path: 'api-services', name: 'apiServices', component: () => import('../views/portal/ApiServiceView.vue') },
+      { path: 'my-applies', name: 'myApplies', component: () => import('../views/portal/MyAppliesView.vue') },
       { path: 'data-pool', name: 'dataPool', component: () => import('../views/portal/DataPoolView.vue') },
       { path: 'data-agreement', name: 'dataAgreement', component: () => import('../views/portal/DataAgreementView.vue') },
       { path: 'about', name: 'about', component: () => import('../views/portal/AboutView.vue') },
@@ -40,8 +43,10 @@ const routes = [
       { path: 'contents/:code', component: () => import('../views/admin/ContentManageView.vue') },
       { path: 'banners', component: () => import('../views/admin/BannerManageView.vue') },
       { path: 'apps', component: () => import('../views/admin/AppManageView.vue') },
-      { path: 'about', component: () => import('../views/admin/AboutManageView.vue') },
-      { path: 'data-collect', component: () => import('../views/admin/DataCollectView.vue') }
+      { path: 'data-collect', component: () => import('../views/admin/DataCollectView.vue') },
+      { path: 'certifications', component: () => import('../views/admin/CertificationReviewView.vue') },
+      { path: 'apply-review', component: () => import('../views/admin/ApplyReviewView.vue') },
+      { path: 'about', component: () => import('../views/admin/AboutManageView.vue') }
     ]
   },
   { path: '/:pathMatch(.*)*', name: 'notFound', component: () => import('../views/portal/NotFoundView.vue') }

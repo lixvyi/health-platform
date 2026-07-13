@@ -11,13 +11,17 @@
         <el-menu-item index="/admin/banners">轮播管理</el-menu-item>
         <el-menu-item index="/admin/apps">应用中心</el-menu-item>
         <el-menu-item index="/admin/data-collect">数据采集</el-menu-item>
+        <el-menu-item index="/admin/certifications">科研认证审核</el-menu-item>
         <el-menu-item index="/admin/about">关于我们</el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
       <el-header class="header">
-        <span>{{ user?.realName || user?.username }}</span>
-        <el-button type="danger" link @click="logout">退出</el-button>
+        <el-button type="primary" link @click="goPortal">← 返回门户首页</el-button>
+        <div class="header-right">
+          <span>{{ user?.realName || user?.username }}</span>
+          <el-button type="danger" link @click="logout">退出</el-button>
+        </div>
       </el-header>
       <el-main><router-view /></el-main>
     </el-container>
@@ -37,11 +41,13 @@ const logout = () => {
   localStorage.removeItem('user')
   router.push('/admin/login')
 }
+const goPortal = () => router.push('/')
 </script>
 
 <style scoped>
 .admin-layout { min-height: 100vh; }
 .aside { background: #001529; }
 .brand { color: #fff; padding: 20px; font-weight: 700; }
-.header { display: flex; justify-content: flex-end; align-items: center; gap: 12px; background: #fff; border-bottom: 1px solid #eee; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #fff; border-bottom: 1px solid #eee; }
+.header-right { display: flex; align-items: center; gap: 12px; }
 </style>

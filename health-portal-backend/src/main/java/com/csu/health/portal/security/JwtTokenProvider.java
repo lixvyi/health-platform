@@ -24,11 +24,16 @@ public class JwtTokenProvider {
     }
 
     public String generateToken(Long userId, String username, String role) {
+        return generateToken(userId, username, role, "ADMIN");
+    }
+
+    public String generateToken(Long userId, String username, String role, String userType) {
         Date now = new Date();
         return Jwts.builder()
                 .subject(username)
                 .claim("userId", userId)
                 .claim("role", role)
+                .claim("userType", userType)
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + expirationMs))
                 .signWith(key)

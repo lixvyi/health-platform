@@ -13,13 +13,31 @@
           <router-link to="/knowledge">健康百科</router-link>
           <router-link to="/medical">医疗资源</router-link>
           <router-link to="/data">数据资源</router-link>
+          <router-link to="/resources">资源下载</router-link>
+          <router-link to="/api-services">API服务</router-link>
+          <router-link v-if="store.isLoggedIn" to="/my-applies">我的申请</router-link>
           <router-link to="/data-pool">数据资源池</router-link>
           <router-link to="/apps">应用中心</router-link>
           <router-link to="/symptom-check">症状自查</router-link>
           <router-link to="/about">关于我们</router-link>
           <router-link to="/ai">AI问答</router-link>
         </nav>
-        <el-button type="primary" link @click="$router.push('/admin/login')">管理入口</el-button>
+        <div class="user-area">
+          <template v-if="store.isLoggedIn">
+            <el-dropdown trigger="click">
+              <span class="user-name">{{ store.user?.username }} <el-icon><ArrowDown /></el-icon></span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="$router.push('/my-applies')">我的申请</el-dropdown-item>
+                  <el-dropdown-item v-if="store.certifyStatus !== 'APPROVED'" @click="certifyVisible = true">科研人员认证</el-dropdown-item>
+                  <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+          <el-button v-else type="primary" link class="login-link" @click="store.openAuthDialog('login')">登录</el-button>
+          <el-button type="primary" link @click="$router.push('/admin/login')">管理入口</el-button>
+        </div>
       </div>
     </header>
     <main class="main">
@@ -38,17 +56,39 @@
         <p class="links">
           <router-link to="/data">数据资源目录</router-link>
           <span>|</span>
+          <router-link to="/resources">资源申请</router-link>
+          <span>|</span>
+          <router-link to="/api-services">API服务</router-link>
+          <span>|</span>
           <router-link to="/data-agreement">统计数据库用户协议</router-link>
           <span>|</span>
           <router-link to="/about">关于我们</router-link>
         </p>
       </div>
     </footer>
+
+    <PortalAuthDialog />
+    <CertifyDialog v-model="certifyVisible" @success="store.fetchMe()" />
   </div>
 </template>
 
 <script setup>
-import { Bell } from '@element-plus/icons-vue'
+import { onMounted, ref } from 'vue'
+import { Bell, ArrowDown } from '@element-plus/icons-vue'
+import { usePortalAuthStore } from '../stores/portalAuth'
+import PortalAuthDialog from '../components/PortalAuthDialog.vue'
+import CertifyDialog from '../components/CertifyDialog.vue'
+
+const store = usePortalAuthStore()
+const certifyVisible = ref(false)
+
+const logout = () => {
+  store.logout()
+}
+
+onMounted(() => {
+  if (store.isLoggedIn) store.fetchMe()
+})
 </script>
 
 <style scoped>
@@ -58,8 +98,11 @@ import { Bell } from '@element-plus/icons-vue'
 .notice-button { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, transform .2s; }
 .notice-button:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
 .logo { font-size: 18px; font-weight: 700; cursor: pointer; }
-nav a { color: #fff; margin: 0 8px; text-decoration: none; opacity: .9; font-size: 14px; }
+nav a { color: #fff; margin: 0 6px; text-decoration: none; opacity: .9; font-size: 13px; }
 nav a.router-link-active { opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; }
+.user-area { display: flex; align-items: center; gap: 8px; }
+.user-name { color: #fff; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; }
+.login-link { color: #fff !important; }
 .main { flex: 1; }
 .footer { background: #0d3f66; color: #cde; padding: 20px 16px; font-size: 12px; line-height: 1.8; }
 .footer-inner { text-align: center; }

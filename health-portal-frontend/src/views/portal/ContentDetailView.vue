@@ -10,7 +10,7 @@
     <template v-else-if="item">
       <el-breadcrumb separator="/" class="breadcrumb">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: currentCategory.path }">{{ currentCategory.label }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: backPath }">{{ backLabel.replace('返回', '') }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ item.title }}</el-breadcrumb-item>
       </el-breadcrumb>
 
@@ -84,7 +84,12 @@
         </div>
       </section>
 
-      <div class="actions"><el-button type="primary" plain @click="backToList">返回{{ currentCategory.label }}</el-button></div>
+      <div class="actions">
+        <template v-if="item.categoryCode === 'POLICY'">
+          <el-button type="success" @click="handlePolicyDownload">下载政策文件</el-button>
+        </template>
+        <el-button type="primary" plain @click="router.push(backPath)">{{ backLabel }}</el-button>
+      </div>
     </template>
   </div>
 </template>
@@ -92,22 +97,28 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 import { portalApi } from '../../api'
 import { articleImageOf } from '../../utils/articleImages'
+import { portalUserApi } from '../../api/portalUser'
+import { usePortalAuthStore } from '../../stores/portalAuth'
 
 const route = useRoute()
 const router = useRouter()
+const store = usePortalAuthStore()
 const item = ref(null)
 const related = ref([])
 const coverCredit = ref(null)
 const loading = ref(true)
 const error = ref('')
-const categoryMap = {
-  NEWS: { label: '新闻中心', path: '/news' },
-  POLICY: { label: '卫生政策', path: '/policy' },
-  KNOWLEDGE: { label: '健康百科', path: '/knowledge' }
-}
-const currentCategory = computed(() => categoryMap[item.value?.categoryCode] || categoryMap.KNOWLEDGE)
+const backPath = computed(() => {
+  const map = { NEWS: '/news', NOTICE: '/notice', POLICY: '/policy', KNOWLEDGE: '/knowledge' }
+  return map[item.value?.categoryCode] || '/'
+})
+const backLabel = computed(() => {
+  const map = { NEWS: '返回新闻中心', NOTICE: '返回通知公告', POLICY: '返回卫生政策', KNOWLEDGE: '返回健康百科' }
+  return map[item.value?.categoryCode] || '返回'
+})
 
 const formatDate = (value) => value ? String(value).slice(0, 10) : ''
 const statusText = (value) => ({ VERIFIED: '已核验', OUTDATED: '已过期', UNVERIFIED: '未核验' }[value] || value)
@@ -146,7 +157,17 @@ const load = async () => {
 }
 
 const openRelated = (id) => router.push(`/content/${id}`)
-const backToList = () => router.push(currentCategory.value.path)
+
+const handlePolicyDownload = () => {
+  store.requireAuth(async () => {
+    try {
+      await portalUserApi.downloadPolicyFile(item.value.id)
+      ElMessage.success('政策文件已开始下载')
+    } catch (e) {
+      ElMessage.error(e.message)
+    }
+  })
+}
 
 watch(() => route.params.id, load)
 onMounted(load)
