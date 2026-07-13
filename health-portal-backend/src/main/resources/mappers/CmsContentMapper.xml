@@ -40,9 +40,9 @@
         AND EXISTS (
           SELECT 1
           FROM content_category_rel ccr
-          JOIN knowledge_category kc ON kc.category_code = ccr.category_code
+          JOIN knowledge_category kc ON kc.id = ccr.category_id
           WHERE ccr.content_id = cms_content.id
-            AND kc.category_code = #{knowledgeCategoryCode}
+          AND kc.code = #{knowledgeCategoryCode}
             AND kc.status = 1
         )
       </if>
@@ -72,9 +72,9 @@
         AND EXISTS (
           SELECT 1
           FROM content_category_rel ccr
-          JOIN knowledge_category kc ON kc.category_code = ccr.category_code
+          JOIN knowledge_category kc ON kc.id = ccr.category_id
           WHERE ccr.content_id = cms_content.id
-            AND kc.category_code = #{knowledgeCategoryCode}
+          AND kc.code = #{knowledgeCategoryCode}
             AND kc.status = 1
         )
       </if>
@@ -209,7 +209,7 @@
         SELECT 1
         FROM content_category_rel target_rel
         JOIN content_category_rel candidate_rel
-          ON candidate_rel.category_code = target_rel.category_code
+      ON candidate_rel.category_id = target_rel.category_id
         WHERE target_rel.content_id = #{contentId}
           AND candidate_rel.content_id = cms_content.id
       )

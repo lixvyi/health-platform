@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import PortalLayout from '../layouts/PortalLayout.vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
 
@@ -21,7 +21,12 @@ const routes = [
       { path: 'data-agreement', name: 'dataAgreement', component: () => import('../views/portal/DataAgreementView.vue') },
       { path: 'about', name: 'about', component: () => import('../views/portal/AboutView.vue') },
       { path: 'ai', name: 'ai', component: () => import('../views/portal/AiChatView.vue') },
-      { path: 'symptom-check', name: 'symptomCheck', component: () => import('../views/portal/SymptomCheckView.vue') }
+      {path: 'symptom-check', name: 'symptomCheck', component: () => import('../views/portal/SymptomCheckView.vue')},
+      {
+        path: 'policy-hotword-trend',
+        name: 'policyHotwordTrend',
+        component: () => import('../views/portal/PolicyHotwordTrendView.vue')
+      }
     ]
   },
   { path: '/admin/login', name: 'adminLogin', component: () => import('../views/admin/LoginView.vue') },
