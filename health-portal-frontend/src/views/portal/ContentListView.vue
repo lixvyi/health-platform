@@ -3,7 +3,7 @@
     <div class="page-head">
       <div>
         <h2>{{ title }}</h2>
-        <p v-if="isNews" class="page-subtitle">聚合公共卫生、医疗健康和健康科普相关公开资讯，不与卫生政策栏目重复。</p>
+        <p v-if="isNews" class="page-subtitle">聚合公共卫生、医疗健康和健康科普相关公开资讯</p>
       </div>
       <div class="search-box">
         <el-input v-model="keyword" placeholder="搜索标题" clearable @keyup.enter="search" />

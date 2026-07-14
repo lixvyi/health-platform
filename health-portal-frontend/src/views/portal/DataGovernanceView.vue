@@ -1,6 +1,6 @@
 <template>
-  <div class="container governance-page">
-    <DataPoolNav />
+  <div class="container governance-page" :class="{ embedded }">
+    <DataPoolNav v-if="!embedded" />
 
     <div class="page-heading">
       <div>
@@ -209,6 +209,10 @@ import {
 import DataPoolNav from '../../components/DataPoolNav.vue'
 import { portalApi } from '../../api'
 
+defineProps({
+  embedded: { type: Boolean, default: false }
+})
+
 const loading = ref(false)
 const errorMessage = ref('')
 const keyword = ref('')
@@ -393,6 +397,7 @@ onUnmounted(() => {
   padding-top: 22px;
   padding-bottom: 32px;
 }
+.governance-page.embedded { max-width: none; padding-top: 4px; padding-bottom: 8px; }
 
 .page-heading {
   display: flex;

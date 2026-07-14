@@ -50,3 +50,20 @@ CREATE TABLE IF NOT EXISTS drug_detail
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci COMMENT ='药品说明书详细表';
 
+-- 3. 症状与非处方药推荐映射表
+CREATE TABLE IF NOT EXISTS symptom_otc_map
+(
+    id         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '自增主键',
+    symptom    VARCHAR(200)     NOT NULL COMMENT '症状关键词',
+    drug_id    BIGINT UNSIGNED  NOT NULL COMMENT '关联 drug_basic.id',
+    note       VARCHAR(500)              DEFAULT NULL COMMENT '推荐依据说明',
+    created_at DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+
+    UNIQUE KEY uk_symptom_drug (symptom, drug_id),
+    INDEX idx_symptom (symptom),
+    INDEX idx_drug_id (drug_id),
+    CONSTRAINT fk_symptom_otc_drug FOREIGN KEY (drug_id) REFERENCES drug_basic (id) ON DELETE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci COMMENT ='症状与非处方药推荐映射表';
+

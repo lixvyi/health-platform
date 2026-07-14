@@ -1,6 +1,6 @@
 <template>
-  <div class="container page">
-    <DataPoolNav />
+  <div class="container page" :class="{ embedded }">
+    <DataPoolNav v-if="!embedded" />
     <h2>{{ arch.title || '统一数据资源池与计算平台' }}</h2>
     <p class="lead">{{ arch.description }}</p>
 
@@ -112,6 +112,10 @@ import DataSourceNotice from '../../components/DataSourceNotice.vue'
 import DataPoolNav from '../../components/DataPoolNav.vue'
 import { portalApi } from '../../api'
 
+defineProps({
+  embedded: { type: Boolean, default: false }
+})
+
 const arch = ref({ layers: [], stats: {}, techStack: [], datasets: [] })
 const feeds = ref([])
 const collect = ref(null)
@@ -166,6 +170,7 @@ onMounted(async () => {
 
 <style scoped>
 .page { padding: 24px; margin: 20px auto; max-width: 1200px; }
+.page.embedded { max-width: none; margin: 0; padding: 4px 0 0; }
 .lead { color: #555; line-height: 1.8; margin-bottom: 20px; }
 .stats-row { margin-bottom: 20px; }
 .stat-card {

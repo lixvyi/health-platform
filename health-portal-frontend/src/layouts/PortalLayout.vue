@@ -10,15 +10,8 @@
           <router-link to="/">首页</router-link>
           <router-link to="/news">新闻中心</router-link>
           <router-link to="/policy">卫生政策</router-link>
-          <el-dropdown trigger="hover" class="nav-dropdown" :class="{ 'is-active': isKnowledgeActive }" @command="h => $router.push(h)">
-            <router-link to="/knowledge" class="dropdown-trigger">健康百科</router-link>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command="/symptom-check">症状自查</el-dropdown-item>
-                <el-dropdown-item command="/knowledge" divided>健康百科首页</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
+          <router-link to="/knowledge">健康百科</router-link>
+          <router-link to="/symptom-check">症状自查</router-link>
           <el-dropdown trigger="hover" class="nav-dropdown" :class="{ 'is-active': isMedicalActive }" @command="h => $router.push(h)">
             <router-link to="/medical" class="dropdown-trigger">医疗资源</router-link>
             <template #dropdown>
@@ -30,9 +23,7 @@
           </el-dropdown>
           <router-link to="/data">数据资源</router-link>
           <router-link to="/resources">资源下载</router-link>
-          <router-link to="/api-services">API服务</router-link>
-          <router-link to="/data-pool">数据资源池</router-link>
-          <router-link to="/about">关于我们</router-link>
+          <router-link v-if="store.isResearcher" to="/api-services">API服务</router-link>
           <router-link to="/ai">AI问答</router-link>
         </nav>
         <div class="user-area">
@@ -100,8 +91,6 @@ const route = useRoute()
 const certifyVisible = ref(false)
 
 const isMedicalActive = computed(() => route.path.startsWith('/medical') || route.path.startsWith('/drugs'))
-const isKnowledgeActive = computed(() => route.path.startsWith('/knowledge') || route.path.startsWith('/symptom-check'))
-
 const logout = () => {
   store.logout()
 }

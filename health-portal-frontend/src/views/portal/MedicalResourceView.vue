@@ -3,6 +3,7 @@
     <div class="page-head">
       <div>
         <h2>医疗资源</h2>
+        <p class="lead">基于医院、等级分档及国家医保药品目录查询</p>
       </div>
       <div class="page-actions">
         <router-link to="/drugs"><el-button type="primary" size="small">💊 药品查询</el-button></router-link>

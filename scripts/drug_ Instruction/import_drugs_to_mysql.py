@@ -23,9 +23,15 @@ if not HEALTH_DB_CONFIG['password']:
     exit(1)
 
 # ==================== 路径配置 ====================
-BASE_DIR = r'C:\Users\user\PycharmProjects\爬虫'
-DRUG_FILE = BASE_DIR + r'\.venv\output_cleaned_drugs.json'
-MAPPING_FILE = BASE_DIR + r'\.venv\indication_symptom_mapping.json'
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DRUG_FILE = os.environ.get(
+    'HEALTH_DRUG_FILE',
+    os.path.join(SCRIPT_DIR, 'output_cleaned_drugs.json'),
+)
+MAPPING_FILE = os.environ.get(
+    'HEALTH_DRUG_MAPPING_FILE',
+    os.path.join(SCRIPT_DIR, 'indication_symptom_mapping.json'),
+)
 
 # ==================== 加载数据 ====================
 with open(DRUG_FILE, 'r', encoding='utf-8') as f:

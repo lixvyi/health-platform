@@ -279,25 +279,21 @@ public class ContentService {
 
     public Map<String, Long> stats() {
         String cacheKey = "portal:stats";
-        if (redisTemplate != null) {
-            String cached = redisTemplate.opsForValue().get(cacheKey);
-            if (cached != null && cached.startsWith("{")) {
-                Map<String, Long> parsed = new HashMap<>();
-                for (String part : cached.replace("{", "").replace("}", "").split(",")) {
-                    String[] kv = part.split("=");
-                    if (kv.length == 2) {
-                        parsed.put(kv[0].trim(), Long.parseLong(kv[1].trim()));
-                    }
+        String cached = readCache(cacheKey);
+        if (cached != null && cached.startsWith("{")) {
+            Map<String, Long> parsed = new HashMap<>();
+            for (String part : cached.replace("{", "").replace("}", "").split(",")) {
+                String[] kv = part.split("=");
+                if (kv.length == 2) {
+                    parsed.put(kv[0].trim(), Long.parseLong(kv[1].trim()));
                 }
-                if (!parsed.isEmpty()) {
-                    return parsed;
-                }
+            }
+            if (!parsed.isEmpty()) {
+                return parsed;
             }
         }
         Map<String, Long> stats = buildStats();
-        if (redisTemplate != null) {
-            redisTemplate.opsForValue().set(cacheKey, stats.toString(), 5, TimeUnit.MINUTES);
-        }
+        writeCache(cacheKey, stats.toString(), 5, TimeUnit.MINUTES);
         return stats;
     }
 
@@ -314,8 +310,38 @@ public class ContentService {
     }
 
     private void evictHomeCache() {
+        deleteCache("portal:stats");
+    }
+
+    private String readCache(String key) {
+        if (redisTemplate == null) {
+            return null;
+        }
+        try {
+            return redisTemplate.opsForValue().get(key);
+        } catch (RuntimeException ignored) {
+            return null;
+        }
+    }
+
+    private void writeCache(String key, String value, long timeout, TimeUnit unit) {
+        if (redisTemplate == null) {
+            return;
+        }
+        try {
+            redisTemplate.opsForValue().set(key, value, timeout, unit);
+        } catch (RuntimeException ignored) {
+            // Redis is optional in local development.
+        }
+    }
+
+    private void deleteCache(String key) {
         if (redisTemplate != null) {
-            redisTemplate.delete("portal:stats");
+            try {
+                redisTemplate.delete(key);
+            } catch (RuntimeException ignored) {
+                // Redis is optional in local development.
+            }
         }
     }
 
