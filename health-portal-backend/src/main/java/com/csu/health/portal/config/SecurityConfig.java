@@ -31,7 +31,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/ai/**").permitAll()
+                        .requestMatchers("/api/ai/chat").permitAll()
+                        .requestMatchers("/api/ai/sessions/**").authenticated()
                         .requestMatchers("/api/portal/user/**").authenticated()
                         .requestMatchers(
                                 "/api/auth/**",

@@ -26,7 +26,31 @@ export const portalApi = {
   dataPoolCollectStatus: () => http.get('/portal/data-pool/collect/status'),
   dataPoolBigDataStatus: () => http.get('/portal/data-pool/bigdata/status'),
   dataPoolGovernance: () => http.get('/portal/data-pool/governance'),
-  aiChat: (data) => http.post('/ai/chat', data),
+  // AI：优先带门户登录 token，方便绑定会话到当前用户
+  aiChat: (data) => {
+    const headers = {}
+    const portalToken = localStorage.getItem('portalToken')
+    if (portalToken) headers.Authorization = `Bearer ${portalToken}`
+    return http.post('/ai/chat', data, { headers })
+  },
+  aiSessions: () => {
+    const headers = {}
+    const portalToken = localStorage.getItem('portalToken')
+    if (portalToken) headers.Authorization = `Bearer ${portalToken}`
+    return http.get('/ai/sessions', { headers })
+  },
+  aiSessionMessages: (sessionId) => {
+    const headers = {}
+    const portalToken = localStorage.getItem('portalToken')
+    if (portalToken) headers.Authorization = `Bearer ${portalToken}`
+    return http.get(`/ai/sessions/${encodeURIComponent(sessionId)}`, { headers })
+  },
+  aiDeleteSession: (sessionId) => {
+    const headers = {}
+    const portalToken = localStorage.getItem('portalToken')
+    if (portalToken) headers.Authorization = `Bearer ${portalToken}`
+    return http.delete(`/ai/sessions/${encodeURIComponent(sessionId)}`, { headers })
+  },
   // 热词关联政策搜索
   policiesByWord: (word) => http.get('/portal/policies-by-word', {params: {word}}),
   // 热词共现网络

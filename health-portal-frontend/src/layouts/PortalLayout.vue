@@ -28,6 +28,8 @@
                 <el-dropdown-menu>
                   <el-dropdown-item @click="$router.push('/my-applies')">我的申请</el-dropdown-item>
                   <el-dropdown-item v-if="store.certifyStatus !== 'APPROVED'" @click="certifyVisible = true">科研人员认证</el-dropdown-item>
+                  <el-dropdown-item divided @click="$router.push({ path: '/ai', query: { new: '1' } })">新对话</el-dropdown-item>
+                  <el-dropdown-item @click="$router.push({ path: '/ai', query: { history: '1' } })">历史对话</el-dropdown-item>
                   <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </template>

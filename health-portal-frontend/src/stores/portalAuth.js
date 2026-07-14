@@ -3,16 +3,18 @@ import { ref, computed } from 'vue'
 import { portalUserApi } from '../api/portalUser'
 
 export const usePortalAuthStore = defineStore('portalAuth', () => {
+  const token = ref(localStorage.getItem('portalToken') || '')
   const user = ref(null)
   const authDialogVisible = ref(false)
   const authDialogTab = ref('login')
   const pendingAction = ref(null)
 
-  const isLoggedIn = computed(() => !!localStorage.getItem('portalToken'))
+  const isLoggedIn = computed(() => !!token.value)
   const isResearcher = computed(() => user.value?.role === 'RESEARCHER')
   const certifyStatus = computed(() => user.value?.certifyStatus || 'NONE')
 
   function loadFromStorage() {
+    token.value = localStorage.getItem('portalToken') || ''
     try {
       const raw = localStorage.getItem('portalUser')
       if (raw) user.value = JSON.parse(raw)
@@ -22,7 +24,7 @@ export const usePortalAuthStore = defineStore('portalAuth', () => {
   }
 
   async function fetchMe() {
-    if (!localStorage.getItem('portalToken')) {
+    if (!token.value) {
       user.value = null
       return null
     }
@@ -39,6 +41,7 @@ export const usePortalAuthStore = defineStore('portalAuth', () => {
 
   async function login(form) {
     const res = await portalUserApi.login(form)
+    token.value = res.data.token
     localStorage.setItem('portalToken', res.data.token)
     user.value = res.data
     localStorage.setItem('portalUser', JSON.stringify(res.data))
@@ -47,6 +50,7 @@ export const usePortalAuthStore = defineStore('portalAuth', () => {
 
   async function register(form) {
     const res = await portalUserApi.register(form)
+    token.value = res.data.token
     localStorage.setItem('portalToken', res.data.token)
     user.value = res.data
     localStorage.setItem('portalUser', JSON.stringify(res.data))
@@ -54,6 +58,7 @@ export const usePortalAuthStore = defineStore('portalAuth', () => {
   }
 
   function logout() {
+    token.value = ''
     localStorage.removeItem('portalToken')
     localStorage.removeItem('portalUser')
     user.value = null
@@ -91,7 +96,7 @@ export const usePortalAuthStore = defineStore('portalAuth', () => {
 
   loadFromStorage()
   return {
-    user, authDialogVisible, authDialogTab, pendingAction,
+    token, user, authDialogVisible, authDialogTab, pendingAction,
     isLoggedIn, isResearcher, certifyStatus,
     fetchMe, login, register, logout,
     openAuthDialog, closeAuthDialog, requireAuth, afterAuthSuccess
