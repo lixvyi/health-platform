@@ -432,23 +432,42 @@ def apply(cur) -> None:
         add_column(cur, "medical_drug_catalog", column, definition)
     add_index(cur, "medical_drug_catalog", "uk_drug_source_row", "UNIQUE KEY uk_drug_source_row (source_file(191), source_sheet, source_row)")
 
-    cur.execute(
-        """
-        INSERT INTO knowledge_category (category_code, category_name, description, display_order, status)
-        VALUES
-        ('DISEASE', '疾病知识', '疾病科普、诊疗知识与权威医学说明', 10, 1),
-        ('DRUG', '药品说明', '药品目录、说明书查询入口与权威药品信息', 20, 1),
-        ('VACCINE', '疫苗接种', '国家免疫规划疫苗程序与接种建议', 30, 1),
-        ('EPIDEMIC', '传染病防控', '传染病防控知识与疾控公开信息', 40, 1),
-        ('HEALTH_POPULARIZATION', '健康科普', '健康生活方式、环境健康、公共卫生科普', 50, 1),
-        ('MEDICAL_TERMS', '医学术语标准', '疾病编码、医保编码和医学术语标准', 60, 1)
-        ON DUPLICATE KEY UPDATE
-            category_name=VALUES(category_name),
-            description=VALUES(description),
-            display_order=VALUES(display_order),
-            status=VALUES(status)
-        """
-    )
+    if column_exists(cur, "knowledge_category", "category_code"):
+        cur.execute(
+            """
+            INSERT INTO knowledge_category (category_code, category_name, description, display_order, status)
+            VALUES
+            ('DISEASE', '\u75be\u75c5\u77e5\u8bc6', '\u75be\u75c5\u79d1\u666e\u3001\u8bca\u7597\u77e5\u8bc6\u4e0e\u6743\u5a01\u533b\u5b66\u8bf4\u660e', 10, 1),
+            ('DRUG', '\u836f\u54c1\u8bf4\u660e', '\u836f\u54c1\u76ee\u5f55\u3001\u8bf4\u660e\u4e66\u67e5\u8be2\u5165\u53e3\u4e0e\u6743\u5a01\u836f\u54c1\u4fe1\u606f', 20, 1),
+            ('VACCINE', '\u75ab\u82d7\u63a5\u79cd', '\u56fd\u5bb6\u514d\u75ab\u89c4\u5212\u75ab\u82d7\u7a0b\u5e8f\u4e0e\u63a5\u79cd\u5efa\u8bae', 30, 1),
+            ('EPIDEMIC', '\u4f20\u67d3\u75c5\u9632\u63a7', '\u4f20\u67d3\u75c5\u9632\u63a7\u77e5\u8bc6\u4e0e\u75be\u63a7\u516c\u5f00\u4fe1\u606f', 40, 1),
+            ('HEALTH_POPULARIZATION', '\u5065\u5eb7\u79d1\u666e', '\u5065\u5eb7\u751f\u6d3b\u65b9\u5f0f\u3001\u73af\u5883\u5065\u5eb7\u3001\u516c\u5171\u536b\u751f\u79d1\u666e', 50, 1),
+            ('MEDICAL_TERMS', '\u533b\u5b66\u672f\u8bed\u6807\u51c6', '\u75be\u75c5\u7f16\u7801\u3001\u533b\u4fdd\u7f16\u7801\u548c\u533b\u5b66\u672f\u8bed\u6807\u51c6', 60, 1)
+            ON DUPLICATE KEY UPDATE
+                category_name=VALUES(category_name),
+                description=VALUES(description),
+                display_order=VALUES(display_order),
+                status=VALUES(status)
+            """
+        )
+    else:
+        cur.execute(
+            """
+            INSERT INTO knowledge_category (code, name, icon, sort_order, status)
+            VALUES
+            ('DISEASE', '\u75be\u75c5\u77e5\u8bc6', '\U0001f3e5', 1, 1),
+            ('DRUG', '\u836f\u54c1\u8bf4\u660e', '\U0001f48a', 2, 1),
+            ('VACCINE', '\u75ab\u82d7\u63a5\u79cd', '\U0001f6e1\ufe0f', 3, 1),
+            ('EPIDEMIC', '\u4f20\u67d3\u75c5\u9632\u63a7', '\U0001f9ec', 4, 1),
+            ('HEALTH_SCIENCE', '\u5065\u5eb7\u79d1\u666e', '\u2764\ufe0f', 5, 1),
+            ('MEDICAL_TERM', '\u533b\u5b66\u672f\u8bed\u6807\u51c6', '\U0001f4cb', 6, 1)
+            ON DUPLICATE KEY UPDATE
+                name=VALUES(name),
+                icon=VALUES(icon),
+                sort_order=VALUES(sort_order),
+                status=VALUES(status)
+            """
+        )
     cur.execute(
         """
         INSERT INTO schema_migration (version, description)

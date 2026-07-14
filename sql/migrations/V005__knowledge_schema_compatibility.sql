@@ -226,6 +226,11 @@ DELETE legacy_rel FROM content_category_rel legacy_rel
 JOIN content_category_rel canonical_rel
   ON canonical_rel.content_id = legacy_rel.content_id AND canonical_rel.category_id = @health_id
 WHERE legacy_rel.category_id = @health_legacy_id;
+DELETE legacy_code_rel FROM content_category_rel legacy_code_rel
+JOIN content_category_rel canonical_code_rel
+  ON canonical_code_rel.content_id = legacy_code_rel.content_id
+ AND canonical_code_rel.category_code = 'HEALTH_SCIENCE'
+WHERE legacy_code_rel.category_code = 'HEALTH_POPULARIZATION';
 UPDATE content_category_rel SET category_id = @health_id WHERE category_id = @health_legacy_id;
 CALL v005_update_legacy_relation_code('HEALTH_POPULARIZATION', 'HEALTH_SCIENCE');
 DELETE FROM knowledge_category WHERE id = @health_legacy_id;
@@ -236,6 +241,11 @@ DELETE legacy_rel FROM content_category_rel legacy_rel
 JOIN content_category_rel canonical_rel
   ON canonical_rel.content_id = legacy_rel.content_id AND canonical_rel.category_id = @term_id
 WHERE legacy_rel.category_id = @term_legacy_id;
+DELETE legacy_code_rel FROM content_category_rel legacy_code_rel
+JOIN content_category_rel canonical_code_rel
+  ON canonical_code_rel.content_id = legacy_code_rel.content_id
+ AND canonical_code_rel.category_code = 'MEDICAL_TERM'
+WHERE legacy_code_rel.category_code = 'MEDICAL_TERMS';
 UPDATE content_category_rel SET category_id = @term_id WHERE category_id = @term_legacy_id;
 CALL v005_update_legacy_relation_code('MEDICAL_TERMS', 'MEDICAL_TERM');
 DELETE FROM knowledge_category WHERE id = @term_legacy_id;

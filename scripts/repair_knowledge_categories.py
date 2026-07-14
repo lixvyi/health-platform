@@ -148,11 +148,11 @@ def create_vaccine_articles(cur) -> list[int]:
 def repair_relations(cur) -> None:
     rules = [
         ("DISEASE", "author LIKE '%疾病知识%' OR source_url LIKE 'icd10://%'"),
-        ("MEDICAL_TERMS", "source_url LIKE 'icd10://%'"),
+        ("MEDICAL_TERM", "source_url LIKE 'icd10://%'"),
         ("DRUG", "author LIKE '%药品监督管理局%' OR title LIKE '%药品说明%' OR title LIKE '%说明书%'"),
         ("VACCINE", "title LIKE '%疫苗%' OR title LIKE '%接种%'"),
         ("EPIDEMIC", "author LIKE '%传染病防控%' OR title LIKE '%鼠疫%' OR title LIKE '%流感%' OR title LIKE '%传染病%'"),
-        ("HEALTH_POPULARIZATION", "author LIKE '%环境健康%' OR author LIKE '%放射卫生%' OR author LIKE '%健康科普%' OR author LIKE '%人民网%'"),
+        ("HEALTH_SCIENCE", "author LIKE '%环境健康%' OR author LIKE '%放射卫生%' OR author LIKE '%健康科普%' OR author LIKE '%人民网%'"),
     ]
     for code, where_sql in rules:
         cur.execute(
