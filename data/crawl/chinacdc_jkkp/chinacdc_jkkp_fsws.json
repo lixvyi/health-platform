@@ -1,0 +1,34 @@
+{
+  "sourceId": "chinacdc_jkkp_fsws",
+  "sourceName": "中国疾控中心·放射卫生",
+  "categoryCode": "KNOWLEDGE",
+  "recordCount": 4,
+  "items": [
+    {
+      "title": "核事故后的居家个人去污2025-08-27",
+      "url": "https://www.chinacdc.cn/jkkp/fsws/hfs/202508/t20250827_309909.html",
+      "pubDate": "2025-08-27",
+      "categoryCode": "fsws"
+    },
+    {
+      "title": "核事故的公众防护2025-08-27",
+      "url": "https://www.chinacdc.cn/jkkp/fsws/hfs/202508/t20250827_309908.html",
+      "pubDate": "2025-08-27",
+      "categoryCode": "fsws"
+    },
+    {
+      "title": "有人@你：最完整的核和辐射小知识在这里！2016-07-05",
+      "url": "https://www.chinacdc.cn/jkkp/fsws/hfs/202408/t20240825_295633.html",
+      "pubDate": "2016-07-05",
+      "categoryCode": "fsws"
+    },
+    {
+      "title": "版权与免责声明",
+      "url": "https://www.chinacdc.cn/mzsm/202410/t20241028_302192.html",
+      "pubDate": "",
+      "categoryCode": "fsws"
+    }
+  ],
+  "collectedAt": "2026-07-13T08:59:16.962884+00:00",
+  "status": "success"
+}

@@ -1,0 +1,28 @@
+{
+  "sourceId": "chinacdc_jkkp_crb",
+  "sourceName": "中国疾控中心·传染病",
+  "categoryCode": "KNOWLEDGE",
+  "recordCount": 3,
+  "items": [
+    {
+      "title": "预防鼠疫，你需要知道的这些事2023-10-27",
+      "url": "https://www.chinacdc.cn/jkkp/crb/jcr/202408/t20240822_294949.html",
+      "pubDate": "2023-10-27",
+      "categoryCode": "crb"
+    },
+    {
+      "title": "一图读懂 | 鼠疫可防可治！2019-11-15",
+      "url": "https://www.chinacdc.cn/jkkp/crb/jcr/202408/t20240822_294950.html",
+      "pubDate": "2019-11-15",
+      "categoryCode": "crb"
+    },
+    {
+      "title": "版权与免责声明",
+      "url": "https://www.chinacdc.cn/mzsm/202410/t20241028_302192.html",
+      "pubDate": "",
+      "categoryCode": "crb"
+    }
+  ],
+  "collectedAt": "2026-07-13T08:59:16.962884+00:00",
+  "status": "success"
+}

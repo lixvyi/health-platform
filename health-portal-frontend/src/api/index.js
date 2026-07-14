@@ -54,7 +54,14 @@ export const portalApi = {
   // 热词关联政策搜索
   policiesByWord: (word) => http.get('/portal/policies-by-word', {params: {word}}),
   // 热词共现网络
-  cooccurrence: (year) => http.get('/portal/cooccurrence', {params: {year}})
+  cooccurrence: (year) => http.get('/portal/cooccurrence', {params: {year}}),
+
+  // 药品详情
+  drugSearch: (params) => http.get('/drug/search', {params}),
+  drugDetail: (id) => http.get(`/drug/${id}`),
+  drugRecommend: (params) => http.get('/drug/recommend', {params}),
+  drugCategoryStats: () => http.get('/drug/stats/category-distribution'),
+  drugDosageFormStats: () => http.get('/drug/stats/dosage-form-stats')
 }
 
 // 症状自查API

@@ -1,4 +1,3 @@
--- 门户公众用户、数据/API 资源目录与申请审核
 
 CREATE TABLE IF NOT EXISTS portal_user (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,

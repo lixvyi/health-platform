@@ -3,9 +3,11 @@
     <div class="page-head">
       <div>
         <h2>医疗资源</h2>
-        <p class="lead">基于用户提供的医院、等级分档及国家医保药品目录查询</p>
       </div>
-      <el-tag type="info" effect="plain">信息可能随官方发布更新，请以来源为准</el-tag>
+      <div class="page-actions">
+        <router-link to="/drugs"><el-button type="primary" size="small">💊 药品查询</el-button></router-link>
+        <el-tag type="info" effect="plain">信息可能随官方发布更新，请以来源为准</el-tag>
+      </div>
     </div>
 
     <el-tabs v-model="activeTab" type="border-card">
@@ -50,7 +52,6 @@
         <div class="section-head">
           <div>
             <h3>全国三级公立综合医院等级名单</h3>
-            <p>本地数据来自用户提供的图片转录表，共以实际导入记录为准。</p>
           </div>
           <a href="https://zgcx.nhc.gov.cn/unit" target="_blank" rel="noopener noreferrer">国家卫健委医疗机构查询</a>
         </div>
@@ -71,7 +72,6 @@
       </el-tab-pane>
 
       <el-tab-pane label="医院等级分档" name="grades">
-        <el-alert title="源文件只有等级与医院名称，不含数字名次、专科和年份；本页不将其表述为专科排行榜。" type="warning" show-icon :closable="false" />
         <div class="grade-groups" v-loading="gradeLoading">
           <section v-for="grade in gradeOrder" :key="grade" class="grade-group" :class="{ featured: grade === 'A++++' }">
             <h3>{{ grade }} <small>{{ gradeGroups[grade]?.length || 0 }} 家</small></h3>
@@ -80,32 +80,6 @@
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="药品目录" name="drugs">
-        <div class="section-head"><div><h3>2025年国家医保药品目录</h3><p>分类代码、分类、编号、药品名称和剂型均来自本地导入的原始 Excel；原表无剂型时保持为空，表格保留来源文件、工作表和行号。</p></div></div>
-        <div class="filters">
-          <el-input v-model="drugFilter.categoryCode" placeholder="分类代码" clearable @keyup.enter="searchDrugs" />
-          <el-input v-model="drugFilter.categoryName" placeholder="药品分类" clearable @keyup.enter="searchDrugs" />
-          <el-input v-model="drugFilter.drugNumber" placeholder="编号" clearable @keyup.enter="searchDrugs" />
-          <el-input v-model="drugFilter.drugName" placeholder="药品名称" clearable @keyup.enter="searchDrugs" />
-          <el-input v-model="drugFilter.dosageForm" placeholder="剂型" clearable @keyup.enter="searchDrugs" />
-          <el-button type="primary" :loading="drugLoading" @click="searchDrugs">检索</el-button>
-          <el-button @click="resetDrugs">清空</el-button>
-        </div>
-        <p class="result-count">找到 {{ drugTotal }} 条目录记录</p>
-        <el-table :data="drugs" stripe v-loading="drugLoading">
-          <el-table-column prop="categoryCode" label="分类代码" width="120" />
-          <el-table-column prop="categoryName" label="药品分类" min-width="220" />
-          <el-table-column prop="drugNumber" label="编号" width="110" />
-          <el-table-column prop="drugName" label="药品名称" min-width="230" />
-          <el-table-column prop="dosageForm" label="剂型" min-width="150"><template #default="scope">{{ scope.row.dosageForm || '原表未单列' }}</template></el-table-column>
-          <el-table-column label="来源" min-width="260">
-            <template #default="scope">
-              <span>{{ sourceLabel(scope.row) }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination v-if="drugTotal > pageSize" v-model:current-page="drugPage" :page-size="pageSize" :total="drugTotal" layout="prev, pager, next" @current-change="loadDrugs" />
-      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -128,8 +102,6 @@ const hospitalLoading = ref(false); const hospitalLoaded = ref(false); const hos
 const tertiaryFilter = ref({ province: '', grade: '', keyword: '' })
 const tertiaryHospitals = ref([]); const tertiaryPage = ref(1); const tertiaryTotal = ref(0); const tertiaryLoading = ref(false)
 const gradeGroups = ref({}); const gradeLoading = ref(false); const gradeOrder = ['A++++', 'A+++', 'A++', 'A+', 'A']
-const drugFilter = ref({ categoryCode: '', categoryName: '', drugNumber: '', drugName: '', dosageForm: '' })
-const drugs = ref([]); const drugPage = ref(1); const drugTotal = ref(0); const drugLoading = ref(false)
 
 const cleanParams = (object) => Object.fromEntries(Object.entries(object).filter(([, value]) => value !== '' && value !== null && value !== undefined))
 
@@ -158,24 +130,10 @@ const loadTertiary = async () => {
 }
 const searchTertiary = () => { tertiaryPage.value = 1; loadTertiary() }
 const loadGrades = async () => { gradeLoading.value = true; try { gradeGroups.value = (await portalApi.medicalHospitalGrades()).data || {} } finally { gradeLoading.value = false } }
-const loadDrugs = async () => {
-  drugLoading.value = true
-  try { const response = await portalApi.medicalDrugs({ ...cleanParams(drugFilter.value), page: drugPage.value, size: pageSize }); drugs.value = response.data?.records || []; drugTotal.value = response.data?.total || 0 }
-  finally { drugLoading.value = false }
-}
-const searchDrugs = () => { drugPage.value = 1; loadDrugs() }
-const resetDrugs = () => { drugFilter.value = { categoryCode: '', categoryName: '', drugNumber: '', drugName: '', dosageForm: '' }; searchDrugs() }
-const sourceLabel = (row) => {
-  const file = (row.sourceFile || '').split(/[\\/]/).pop() || '本地导入文件'
-  const sheet = row.sourceSheet ? ` / ${row.sourceSheet}` : ''
-  const line = row.sourceRow ? ` / 第${row.sourceRow}行` : ''
-  return `${file}${sheet}${line}`
-}
 
 watch(activeTab, (tab) => {
   if (tab === 'tertiary' && !tertiaryHospitals.value.length) loadTertiary()
   if (tab === 'grades' && !Object.keys(gradeGroups.value).length) loadGrades()
-  if (tab === 'drugs' && !drugs.value.length) loadDrugs()
 })
 
 onMounted(async () => { await Promise.all([loadProvinces(), loadHospitals()]) })

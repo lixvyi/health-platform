@@ -10,13 +10,28 @@
           <router-link to="/">首页</router-link>
           <router-link to="/news">新闻中心</router-link>
           <router-link to="/policy">卫生政策</router-link>
-          <router-link to="/knowledge">健康百科</router-link>
-          <router-link to="/medical">医疗资源</router-link>
+          <el-dropdown trigger="hover" class="nav-dropdown" :class="{ 'is-active': isKnowledgeActive }" @command="h => $router.push(h)">
+            <router-link to="/knowledge" class="dropdown-trigger">健康百科</router-link>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="/symptom-check">症状自查</el-dropdown-item>
+                <el-dropdown-item command="/knowledge" divided>健康百科首页</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <el-dropdown trigger="hover" class="nav-dropdown" :class="{ 'is-active': isMedicalActive }" @command="h => $router.push(h)">
+            <router-link to="/medical" class="dropdown-trigger">医疗资源</router-link>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="/drugs">药品查询</el-dropdown-item>
+                <el-dropdown-item command="/medical" divided>医疗资源首页</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
           <router-link to="/data">数据资源</router-link>
           <router-link to="/resources">资源下载</router-link>
           <router-link to="/api-services">API服务</router-link>
           <router-link to="/data-pool">数据资源池</router-link>
-          <router-link to="/symptom-check">症状自查</router-link>
           <router-link to="/about">关于我们</router-link>
           <router-link to="/ai">AI问答</router-link>
         </nav>
@@ -45,7 +60,7 @@
     </main>
     <footer class="footer">
       <div class="container footer-inner">
-        <p class="copyright">© 2026 健康大数据应用创新研发中心 | 中南大学计算机学院实训项目</p>
+        <p class="copyright">&copy; 2026 健康大数据应用创新研发中心 | 中南大学计算机学院实训项目</p>
         <p class="legal">
           引用
           <a href="https://data.stats.gov.cn" target="_blank" rel="noopener noreferrer">国家统计数据库</a>
@@ -73,14 +88,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { Bell, ArrowDown } from '@element-plus/icons-vue'
 import { usePortalAuthStore } from '../stores/portalAuth'
 import PortalAuthDialog from '../components/PortalAuthDialog.vue'
 import CertifyDialog from '../components/CertifyDialog.vue'
 
 const store = usePortalAuthStore()
+const route = useRoute()
 const certifyVisible = ref(false)
+
+const isMedicalActive = computed(() => route.path.startsWith('/medical') || route.path.startsWith('/drugs'))
+const isKnowledgeActive = computed(() => route.path.startsWith('/knowledge') || route.path.startsWith('/symptom-check'))
 
 const logout = () => {
   store.logout()
@@ -98,8 +118,50 @@ onMounted(() => {
 .notice-button { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, transform .2s; }
 .notice-button:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
 .logo { font-size: 18px; font-weight: 700; cursor: pointer; }
-nav a { color: #fff; margin: 0 6px; text-decoration: none; opacity: .9; font-size: 13px; }
+nav { display: flex; align-items: stretch; gap: 10px; }
+nav a { display: flex; align-items: center; color: #fff; text-decoration: none; opacity: .9; font-size: 13px; }
 nav a.router-link-active { opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; }
+.nav-dropdown {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  opacity: .9;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  line-height: 1;
+  padding: 0;
+}
+.nav-dropdown:hover { opacity: 1; }
+/* 覆盖 el-dropdown 内部默认样式 */
+.nav-dropdown:deep(.el-dropdown__popper) { font-size: 13px; }
+.nav-dropdown:deep(.el-tooltip__trigger),
+.nav-dropdown:deep(.el-dropdown__wrapper) {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap;
+}
+.nav-dropdown .dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: inherit;
+  font-size: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+  line-height: normal;
+  padding: 0;
+}
+.nav-dropdown .dropdown-trigger.router-link-active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+}
+.nav-dropdown.is-active .dropdown-trigger {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+}
 .user-area { display: flex; align-items: center; gap: 8px; }
 .user-name { color: #fff; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; }
 .login-link { color: #fff !important; }

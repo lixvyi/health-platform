@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T14:03:58.662814+08:00",
+  "generatedAt": "2026-07-13T18:24:56.308734+08:00",
   "mode": "normalized-export-no-database-write",
   "datasets": [
     {
@@ -35,42 +35,89 @@
       "warnings": [
         "该文件只有等级和医院名称，不含数字名次、专科或年份，禁止当作专科Top 10。"
       ]
-    },
-    {
-      "datasetCode": "NATIONAL_DRUG_CATALOG_2025",
-      "datasetName": "2025年国家医保药品目录",
-      "sourceFile": "data\\processed\\health-resources\\NATIONAL_DRUG_CATALOG_2025.json",
-      "sourceSha256": "85800f8e261b6724d99231dba85ce0d2c83597ef71056055a079969e823f68b9",
-      "recordCount": 22212,
-      "duplicateCount": 3721,
-      "errorCount": 3,
-      "warnings": [
-        "1651 条记录没有独立剂型；保持空值，不从药名推断。",
-        "追加 18771 条来自 data/policies 的医保药品目录数据信息；保留 CSV 来源行号。"
-      ]
-    },
-    {
-      "datasetCode": "VACCINE_SCHEDULE_2021",
-      "datasetName": "国家免疫规划儿童免疫程序",
-      "sourceFile": "data\\processed\\health-resources\\VACCINE_SCHEDULE_2021.json",
-      "sourceSha256": "0444fa653c21a1b36dbc2ec1c5165ff79f4d9c60fbeffe78f122f924fef42915",
-      "recordCount": 13,
-      "duplicateCount": 0,
-      "errorCount": 0,
-      "warnings": []
-    },
-    {
-      "datasetCode": "VACCINE_HIV_GUIDANCE_2021",
-      "datasetName": "HIV感染母亲所生儿童接种建议",
-      "sourceFile": "data\\processed\\health-resources\\VACCINE_HIV_GUIDANCE_2021.json",
-      "sourceSha256": "656107b9c71e283b4513b3675e2308cbe0d2a8ad0b7b90e30d89339a3f8191ae",
-      "recordCount": 16,
-      "duplicateCount": 0,
-      "errorCount": 0,
-      "warnings": []
     }
   ],
   "crawlSources": [
+    {
+      "file": "data\\crawl\\chinacdc_epidemic\\chinacdc_epidemic.json",
+      "sourceName": "中国疾控中心·传染病疫情通报",
+      "recordCount": 12,
+      "actualItems": 12,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_crb.json",
+      "sourceName": "中国疾控中心·传染病",
+      "recordCount": 3,
+      "actualItems": 3,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_fsws.json",
+      "sourceName": "中国疾控中心·放射卫生",
+      "recordCount": 4,
+      "actualItems": 4,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_ggws.json",
+      "sourceName": "中国疾控中心·公共卫生事件",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_hjjk.json",
+      "sourceName": "中国疾控中心·环境健康",
+      "recordCount": 15,
+      "actualItems": 15,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": true
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_mxfcrxjb.json",
+      "sourceName": "中国疾控中心·慢性非传染性疾病",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_mygh.json",
+      "sourceName": "中国疾控中心·免疫规划",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_yckz.json",
+      "sourceName": "中国疾控中心·烟草控制",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_yyjk.json",
+      "sourceName": "中国疾控中心·营养与健康",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
+      "file": "data\\crawl\\chinacdc_jkkp\\chinacdc_jkkp_zyjk.json",
+      "sourceName": "中国疾控中心·职业健康与中毒控制",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
     {
       "file": "data\\crawl\\chinacdc_jkkp\\crb.json",
       "sourceName": "中国疾控中心·传染病",
@@ -149,6 +196,14 @@
       "trustedForAutomaticImport": false
     },
     {
+      "file": "data\\crawl\\cma_kepu\\cma_kepu.json",
+      "sourceName": "中华医学会·科普图文",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
+    },
+    {
       "file": "data\\crawl\\cms\\china_cdc_public_health_news.json",
       "sourceName": "中国疾控中心-公共卫生数据通报",
       "recordCount": 12,
@@ -167,10 +222,10 @@
     {
       "file": "data\\crawl\\cms\\internet_data_news.json",
       "sourceName": "互联网采集-数据与卫生资讯",
-      "recordCount": 0,
-      "actualItems": 0,
+      "recordCount": 30,
+      "actualItems": 30,
       "seedUrlCount": 0,
-      "trustedForAutomaticImport": false
+      "trustedForAutomaticImport": true
     },
     {
       "file": "data\\crawl\\cms\\internet_health_mirror.json",
@@ -256,6 +311,14 @@
       "file": "data\\crawl\\nhc\\nhc_kepu.json",
       "status": "invalid",
       "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "file": "data\\crawl\\nhc_kepu\\nhc_kepu.json",
+      "sourceName": "国家卫健委·健康科普",
+      "recordCount": 0,
+      "actualItems": 0,
+      "seedUrlCount": 0,
+      "trustedForAutomaticImport": false
     }
   ]
 }

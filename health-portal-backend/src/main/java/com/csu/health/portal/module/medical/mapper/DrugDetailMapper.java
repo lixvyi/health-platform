@@ -1,0 +1,9 @@
+package com.csu.health.portal.module.medical.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.csu.health.portal.module.medical.entity.DrugDetail;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface DrugDetailMapper extends BaseMapper<DrugDetail> {
+}

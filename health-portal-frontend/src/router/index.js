@@ -26,6 +26,15 @@ const routes = [
       { path: 'about', name: 'about', component: () => import('../views/portal/AboutView.vue') },
       { path: 'ai', name: 'ai', component: () => import('../views/portal/AiChatView.vue') },
       {path: 'symptom-check', name: 'symptomCheck', component: () => import('../views/portal/SymptomCheckView.vue')},
+      {path: 'drugs', name: 'drugSearch', component: () => import('../views/portal/DrugSearchView.vue')},
+      {path: 'drugs/:id', name: 'drugDetail', component: () => import('../views/portal/DrugDetailView.vue')},
+      {
+        path: 'drugs/recommend',
+        name: 'drugRecommend',
+        component: () => import('../views/portal/DrugRecommendView.vue')
+      },
+      {path: 'drugs/catalog', name: 'drugCatalog', component: () => import('../views/portal/DrugCatalogView.vue')},
+      {path: 'drugs/stats', name: 'drugStats', component: () => import('../views/portal/DrugStatsView.vue')},
       {
         path: 'policy-hotword-trend',
         name: 'policyHotwordTrend',

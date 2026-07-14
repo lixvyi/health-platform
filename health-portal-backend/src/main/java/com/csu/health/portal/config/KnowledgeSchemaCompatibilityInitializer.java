@@ -238,8 +238,26 @@ public class KnowledgeSchemaCompatibilityInitializer {
                 || !columnExists("knowledge_category", canonicalColumn)) {
             return;
         }
+
+        // 处理重复的 category_code：相同值的多行中，保留 id 最小的行，其余追加 _id 后缀
+        jdbcTemplate.update("UPDATE knowledge_category kc1 "
+                + "INNER JOIN knowledge_category kc2 ON kc1." + legacyColumn + " = kc2." + legacyColumn + " "
+                + "SET kc1." + canonicalColumn + " = CONCAT(kc1." + legacyColumn + ", '_', kc1.id) "
+                + "WHERE kc1.id > kc2.id "
+                + "AND (kc1." + canonicalColumn + " IS NULL OR kc1." + canonicalColumn + " = '') "
+                + "AND kc1." + legacyColumn + " IS NOT NULL AND kc1." + legacyColumn + " != ''");
+
+        // 处理 category_code 与已有的 code 值冲突
+        jdbcTemplate.update("UPDATE knowledge_category kc1 "
+                + "INNER JOIN knowledge_category kc2 ON kc1." + legacyColumn + " = kc2." + canonicalColumn + " "
+                + "SET kc1." + canonicalColumn + " = CONCAT(kc1." + legacyColumn + ", '_', kc1.id) "
+                + "WHERE (kc1." + canonicalColumn + " IS NULL OR kc1." + canonicalColumn + " = '') "
+                + "AND kc1.id != kc2.id");
+
+        // 剩余无冲突的行直接复制
         jdbcTemplate.update("UPDATE knowledge_category SET " + canonicalColumn + " = " + legacyColumn
                 + " WHERE " + canonicalColumn + " IS NULL OR " + canonicalColumn + " = ''");
+
         if (!columnIsNullable("knowledge_category", legacyColumn)) {
             jdbcTemplate.execute("ALTER TABLE knowledge_category MODIFY COLUMN "
                     + legacyColumn + " " + nullableDefinition);
