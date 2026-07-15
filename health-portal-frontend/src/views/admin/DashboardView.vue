@@ -47,6 +47,9 @@
       <el-tab-pane label="数据治理" name="governance" lazy>
         <DataGovernanceView embedded />
       </el-tab-pane>
+      <el-tab-pane label="API用量" name="api" lazy>
+        <ApiUsageView />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -59,10 +62,11 @@ import { Bell, Collection, DataAnalysis, DataLine, Document, Grid } from '@eleme
 import { adminApi } from '../../api'
 import DataPoolView from '../portal/DataPoolView.vue'
 import DataGovernanceView from '../portal/DataGovernanceView.vue'
+import ApiUsageView from './ApiUsageView.vue'
 
 const route = useRoute()
 const router = useRouter()
-const validTabs = new Set(['stats', 'pool', 'governance'])
+const validTabs = new Set(['stats', 'pool', 'governance', 'api'])
 const initialTab = typeof route.query.tab === 'string' && validTabs.has(route.query.tab) ? route.query.tab : 'stats'
 const activeTab = ref(initialTab)
 const stats = ref({})

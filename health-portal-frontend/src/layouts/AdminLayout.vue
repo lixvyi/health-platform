@@ -12,6 +12,7 @@
         <el-menu-item index="/admin/apps">应用中心</el-menu-item>
         <el-menu-item index="/admin/data-collect">数据采集</el-menu-item>
         <el-menu-item index="/admin/certifications">科研认证审核</el-menu-item>
+        <el-menu-item index="/admin/api-keys">API 密钥管理</el-menu-item>
         <el-menu-item index="/admin/about">关于我们</el-menu-item>
       </el-menu>
     </el-aside>

@@ -47,6 +47,10 @@ export const portalUserApi = {
   getApi: (id) => http.get(`/portal/catalog/apis/${id}`),
   apiAccessStatus: () => portalHttp.get('/portal/user/apis/access-status'),
   invokeApi: (id) => portalHttp.post(`/portal/user/apis/${id}/invoke`),
+  testExternalApi: (serviceCode, params) => portalHttp.post(`/portal/user/external-test/${serviceCode}`, null, {params}),
+
+  myApiKeys: () => portalHttp.get('/portal/user/api-keys'),
+  applyApiKey: (data) => portalHttp.post('/portal/user/api-keys/apply', data),
 
   downloadPolicyFile: (contentId) =>
     downloadBlob(`/api/portal/user/policies/${contentId}/download-file`, `policy-${contentId}.html`)

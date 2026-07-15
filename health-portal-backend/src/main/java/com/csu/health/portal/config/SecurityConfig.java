@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final ApiAuthFilter apiAuthFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,6 +44,7 @@ public class SecurityConfig {
                                 "/api/portal/catalog/**",
                                 "/api/portal/**",
                                 "/api/v1/**",
+                                "/api/external/**",
                                 "/uploads/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
@@ -53,7 +55,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/portal/**").hasRole("ADMIN")
                         .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "EDITOR")
                         .anyRequest().authenticated())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(apiAuthFilter, JwtAuthFilter.class);
         return http.build();
     }
 }

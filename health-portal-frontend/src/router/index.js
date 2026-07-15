@@ -20,6 +20,7 @@ const routes = [
       { path: 'resources', name: 'resources', component: () => import('../views/portal/ResourceApplyView.vue') },
       { path: 'api-services', name: 'apiServices', component: () => import('../views/portal/ApiServiceView.vue') },
       { path: 'my-applies', name: 'myApplies', component: () => import('../views/portal/MyAppliesView.vue') },
+      {path: 'my-api-keys', name: 'myApiKeys', component: () => import('../views/portal/MyApiKeysView.vue')},
       { path: 'data-pool', name: 'dataPool', redirect: '/admin/dashboard?tab=pool' },
       { path: 'data-pool/governance', name: 'dataGovernance', redirect: '/admin/dashboard?tab=governance' },
       { path: 'data-agreement', name: 'dataAgreement', component: () => import('../views/portal/DataAgreementView.vue') },
@@ -56,6 +57,7 @@ const routes = [
       { path: 'data-collect', component: () => import('../views/admin/DataCollectView.vue') },
       { path: 'certifications', component: () => import('../views/admin/CertificationReviewView.vue') },
       { path: 'apply-review', component: () => import('../views/admin/ApplyReviewView.vue') },
+      {path: 'api-keys', component: () => import('../views/admin/ApiKeyManageView.vue')},
       { path: 'about', component: () => import('../views/admin/AboutManageView.vue') }
     ]
   },

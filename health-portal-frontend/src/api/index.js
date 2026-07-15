@@ -102,5 +102,15 @@ export const adminApi = {
     return http.post('/admin/files/upload', form, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
-  }
+  },
+  // API 应用管理
+  apiApps: () => http.get('/admin/api-apps'),
+  approveApiApp: (id) => http.put(`/admin/api-apps/${id}/approve`),
+  toggleApiApp: (id) => http.put(`/admin/api-apps/${id}/toggle-status`),
+  rotateApiSecret: (id) => http.put(`/admin/api-apps/${id}/rotate-secret`),
+  updateApiAppQuota: (id, data) => http.put(`/admin/api-apps/${id}/quota`, data),
+  // API 用量统计
+  apiUsageToday: () => http.get('/admin/api-usage/today'),
+  apiUsageTrend: (days) => http.get('/admin/api-usage/trend', {params: {days}}),
+  apiUsageOverview: (days) => http.get('/admin/api-usage/overview', {params: {days}})
 }
