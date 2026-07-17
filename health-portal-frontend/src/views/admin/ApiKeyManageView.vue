@@ -180,3 +180,6 @@ const doUpdateQuota = async () => {
 
 onMounted(load)
 </script>
+
+<style scoped>
+</style>

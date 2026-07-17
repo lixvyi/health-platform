@@ -72,21 +72,25 @@ const loadTrend = async () => {
     const res = await adminApi.apiUsageTrend(trendDays.value)
     const data = res.data || []
 
-    // 按 appKey 分组构建多条折线
-    const seriesMap = {}
-    const daysSet = new Set()
+    // 生成完整日期轴（确保每天都有刻度，无数据补 0）
+    const days = buildDateRange(trendDays.value)
+
+    // 按 appKey 分组，用 day→count 映射保证数据与 x 轴对齐
+    const groupMap = {}
     data.forEach(item => {
       const key = item.appKey || 'unknown'
-      const name = item.appName || key
-      if (!seriesMap[key]) {
-        seriesMap[key] = { name, type: 'line', smooth: true, data: [] }
-      }
-      seriesMap[key].data.push(item.count)
-      daysSet.add(item.day)
+      if (!groupMap[key]) groupMap[key] = { name: item.appName || key, counts: {} }
+      // day 可能是 "2026-07-15" 或 "2026-07-15T00:00:00" 格式，统一截取前 10 位
+      const dayStr = String(item.day).slice(0, 10)
+      groupMap[key].counts[dayStr] = (groupMap[key].counts[dayStr] || 0) + Number(item.count)
     })
 
-    const days = Array.from(daysSet).sort()
-    const series = Object.values(seriesMap)
+    const series = Object.values(groupMap).map(g => ({
+      name: g.name,
+      type: 'line',
+      smooth: true,
+      data: days.map(d => g.counts[d] || 0)
+    }))
 
     await nextTick()
     if (!trendChart) {
@@ -95,13 +99,34 @@ const loadTrend = async () => {
     trendChart.setOption({
       tooltip: { trigger: 'axis' },
       legend: { type: 'scroll', bottom: 0 },
-      xAxis: { type: 'category', data: days, axisLabel: { rotate: 45 } },
+      xAxis: {
+        type: 'category',
+        data: days,
+        axisLabel: {
+          rotate: 45,
+          // 只显示 MM-DD，超过 14 天时自动间隔
+          formatter: v => v.slice(5),
+          interval: trendDays.value <= 7 ? 0 : trendDays.value <= 30 ? 2 : 6
+        }
+      },
       yAxis: { type: 'value' },
       grid: { left: 50, right: 20, bottom: 60 },
       series
-    })
+    }, true)
     trendChart.resize()
   } catch (_) { /* ignore */ }
+}
+
+/** 生成近 N 天的日期数组 [YYYY-MM-DD, ...] */
+function buildDateRange(n) {
+  const result = []
+  const today = new Date()
+  for (let i = n - 1; i >= 0; i--) {
+    const d = new Date(today)
+    d.setDate(d.getDate() - i)
+    result.push(d.toISOString().slice(0, 10))
+  }
+  return result
 }
 
 const handleRowClick = (row) => {
